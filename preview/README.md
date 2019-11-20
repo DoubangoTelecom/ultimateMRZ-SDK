@@ -9,7 +9,7 @@
 
 This folder contains a preview version of our MRZ deep learning engine **for Windows**. We're working to release the full documentation and add some speed optimizations. We're releasing this preview because we've received many emails from companies requesting to have access to our cloud API hosted at https://www.doubango.org/webapps/mrz/.
 
-We're working to release the SDK for the coming days. The initial version will support **Android**, **Windows** and **Raspberry pi**. The SDK will have the sample API for all platforms which means you cant start testing on Windows and easily switch to another platform (e.g. Android or iOS) when we release the code.
+We're working to release the SDK for the coming days. The initial version will support **Android**, **Windows** and **Raspberry pi**. The SDK will have the same API for all platforms which means you can start testing on Windows and easily switch to another platform (e.g. Android or iOS) when we release the code.
 
 This preview is a trial version and may come with some restrictions (some characters obfuscated with a '\*' placeholder).
 
@@ -20,8 +20,9 @@ The root directory contains the following folders:
 - [assets](assets):
   - [mrz.classifier.params.json.doubango](assets/mrz.classifier.params.json.doubango): configuration file for the Doubango deep learning model
   - [mrz.classifier.strong.model.flat](assets/mrz.classifier.strong.model.flat): Doubango deep learning model for the detection
-  - [mrz.classifier.strong.pca.json](assets/mrz.classifier.strong.pca.json): pca (Principal component analysis) data
+  - [mrz.classifier.strong.pca.json](assets/mrz.classifier.strong.pca.json): pca (Principal component analysis) data for the deep learning model
   - [mrz.traineddata](assets/mrz.traineddata): Tesseract traineddata
+  
   These files must be redistributed with your application and installed in the sample forlder (final release will allow speciying the assets folder)
   
 - [images](images): sample images
@@ -62,6 +63,7 @@ mrz_sample.exe images/Czech_passport_2005_MRZ_data_1300x1002_yuv420p.jpg
 ```
 
 [images](images) folder contains sample images like the next one:
+
 <img src="images/Czech_passport_2005_MRZ_data_1300x1002.jpg">
 
 <a name="Technical_questions"></a>
