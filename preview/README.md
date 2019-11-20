@@ -23,7 +23,7 @@ The root directory contains the following folders:
   - [mrz.classifier.strong.pca.json](assets/mrz.classifier.strong.pca.json): pca (Principal component analysis) data for the deep learning model
   - [mrz.traineddata](assets/mrz.traineddata): Tesseract traineddata
   
-  These files must be redistributed with your application and installed in the sample forlder (final release will allow speciying the assets folder)
+  These files must be redistributed with your application and installed in the sample folder (final release will allow specifying the assets folder)
   
 - [images](images): sample images
 - [bin](bin): dll to redistribute with your application
