@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1568900623B63C7300273BA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1568900523B63C7300273BA1 /* main.m */; };
+		1568900923B63C7300273BA1 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1568900823B63C7300273BA1 /* AppDelegate.mm */; };
+		1568900C23B63C7300273BA1 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1568900B23B63C7300273BA1 /* ViewController.mm */; };
+		1568900F23B63C7300273BA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1568900D23B63C7300273BA1 /* Main.storyboard */; };
+		1568901123B63C7300273BA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1568901023B63C7300273BA1 /* Assets.xcassets */; };
+		1568901423B63C7300273BA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1568901223B63C7300273BA1 /* LaunchScreen.storyboard */; };
+		1568901C23B63CF700273BA1 /* ultimate_mrz-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1568901B23B63CF700273BA1 /* ultimate_mrz-sdk.framework */; };
+		1568901D23B63CF700273BA1 /* ultimate_mrz-sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1568901B23B63CF700273BA1 /* ultimate_mrz-sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1568902423B63DFC00273BA1 /* mrz.classifier.params.json.doubango in Resources */ = {isa = PBXBuildFile; fileRef = 1568902023B63DFC00273BA1 /* mrz.classifier.params.json.doubango */; };
+		1568902523B63DFC00273BA1 /* mrz.classifier.strong.model.flat in Resources */ = {isa = PBXBuildFile; fileRef = 1568902123B63DFC00273BA1 /* mrz.classifier.strong.model.flat */; };
+		1568902623B63DFC00273BA1 /* mrz.classifier.strong.pca.json in Resources */ = {isa = PBXBuildFile; fileRef = 1568902223B63DFC00273BA1 /* mrz.classifier.strong.pca.json */; };
+		1568902723B63DFC00273BA1 /* mrz.traineddata in Resources */ = {isa = PBXBuildFile; fileRef = 1568902323B63DFC00273BA1 /* mrz.traineddata */; };
+		1568902A23B63FEF00273BA1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1568902923B63FEF00273BA1 /* AVFoundation.framework */; };
+		1568903423B6444C00273BA1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1568902E23B6442700273BA1 /* CoreMedia.framework */; };
+		15E4BA5F23B864FA00141AA0 /* OcrB Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E4BA5E23B864FA00141AA0 /* OcrB Regular.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1568901E23B63CF700273BA1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1568901D23B63CF700273BA1 /* ultimate_mrz-sdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1568900123B63C7300273BA1 /* VideoRecognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoRecognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1568900523B63C7300273BA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1568900723B63C7300273BA1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1568900823B63C7300273BA1 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1568900A23B63C7300273BA1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1568900B23B63C7300273BA1 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		1568900E23B63C7300273BA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1568901023B63C7300273BA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1568901323B63C7300273BA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1568901523B63C7300273BA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1568901B23B63CF700273BA1 /* ultimate_mrz-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ultimate_mrz-sdk.framework"; path = "../../../binaries/ios/ultimate_mrz-sdk.framework"; sourceTree = "<group>"; };
+		1568902023B63DFC00273BA1 /* mrz.classifier.params.json.doubango */ = {isa = PBXFileReference; lastKnownFileType = file; path = mrz.classifier.params.json.doubango; sourceTree = "<group>"; };
+		1568902123B63DFC00273BA1 /* mrz.classifier.strong.model.flat */ = {isa = PBXFileReference; lastKnownFileType = file; path = mrz.classifier.strong.model.flat; sourceTree = "<group>"; };
+		1568902223B63DFC00273BA1 /* mrz.classifier.strong.pca.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mrz.classifier.strong.pca.json; sourceTree = "<group>"; };
+		1568902323B63DFC00273BA1 /* mrz.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = mrz.traineddata; sourceTree = "<group>"; };
+		1568902923B63FEF00273BA1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1568902B23B6413000273BA1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		1568902E23B6442700273BA1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1568902F23B6442700273BA1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		1568903023B6442700273BA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		15E4BA5E23B864FA00141AA0 /* OcrB Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OcrB Regular.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15688FFE23B63C7300273BA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1568903423B6444C00273BA1 /* CoreMedia.framework in Frameworks */,
+				1568902A23B63FEF00273BA1 /* AVFoundation.framework in Frameworks */,
+				1568901C23B63CF700273BA1 /* ultimate_mrz-sdk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15688FF823B63C7300273BA1 = {
+			isa = PBXGroup;
+			children = (
+				15E4BA5D23B864FA00141AA0 /* fonts */,
+				1568901F23B63DFC00273BA1 /* models */,
+				1568901B23B63CF700273BA1 /* ultimate_mrz-sdk.framework */,
+				1568900323B63C7300273BA1 /* VideoRecognizer */,
+				1568900223B63C7300273BA1 /* Products */,
+				1568902823B63FEF00273BA1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1568900223B63C7300273BA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1568900123B63C7300273BA1 /* VideoRecognizer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1568900323B63C7300273BA1 /* VideoRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				1568900723B63C7300273BA1 /* AppDelegate.h */,
+				1568900823B63C7300273BA1 /* AppDelegate.mm */,
+				1568900A23B63C7300273BA1 /* ViewController.h */,
+				1568900B23B63C7300273BA1 /* ViewController.mm */,
+				1568900D23B63C7300273BA1 /* Main.storyboard */,
+				1568901023B63C7300273BA1 /* Assets.xcassets */,
+				1568901223B63C7300273BA1 /* LaunchScreen.storyboard */,
+				1568901523B63C7300273BA1 /* Info.plist */,
+				1568900423B63C7300273BA1 /* Supporting Files */,
+			);
+			path = VideoRecognizer;
+			sourceTree = "<group>";
+		};
+		1568900423B63C7300273BA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1568900523B63C7300273BA1 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1568901F23B63DFC00273BA1 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				1568902023B63DFC00273BA1 /* mrz.classifier.params.json.doubango */,
+				1568902123B63DFC00273BA1 /* mrz.classifier.strong.model.flat */,
+				1568902223B63DFC00273BA1 /* mrz.classifier.strong.pca.json */,
+				1568902323B63DFC00273BA1 /* mrz.traineddata */,
+			);
+			name = models;
+			path = ../../../assets/models;
+			sourceTree = "<group>";
+		};
+		1568902823B63FEF00273BA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1568902E23B6442700273BA1 /* CoreMedia.framework */,
+				1568902F23B6442700273BA1 /* CoreVideo.framework */,
+				1568903023B6442700273BA1 /* QuartzCore.framework */,
+				1568902B23B6413000273BA1 /* CoreImage.framework */,
+				1568902923B63FEF00273BA1 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		15E4BA5D23B864FA00141AA0 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				15E4BA5E23B864FA00141AA0 /* OcrB Regular.ttf */,
+			);
+			name = fonts;
+			path = ../../../assets/fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1568900023B63C7300273BA1 /* VideoRecognizer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1568901823B63C7300273BA1 /* Build configuration list for PBXNativeTarget "VideoRecognizer" */;
+			buildPhases = (
+				15688FFD23B63C7300273BA1 /* Sources */,
+				15688FFE23B63C7300273BA1 /* Frameworks */,
+				15688FFF23B63C7300273BA1 /* Resources */,
+				1568901E23B63CF700273BA1 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoRecognizer;
+			productName = VideoRecognizer;
+			productReference = 1568900123B63C7300273BA1 /* VideoRecognizer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15688FF923B63C7300273BA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Doubango Telecom";
+				TargetAttributes = {
+					1568900023B63C7300273BA1 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = E6F3H8ENQM;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 15688FFC23B63C7300273BA1 /* Build configuration list for PBXProject "VideoRecognizer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = 15688FF823B63C7300273BA1;
+			productRefGroup = 1568900223B63C7300273BA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1568900023B63C7300273BA1 /* VideoRecognizer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15688FFF23B63C7300273BA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1568901423B63C7300273BA1 /* LaunchScreen.storyboard in Resources */,
+				1568901123B63C7300273BA1 /* Assets.xcassets in Resources */,
+				1568902423B63DFC00273BA1 /* mrz.classifier.params.json.doubango in Resources */,
+				1568900F23B63C7300273BA1 /* Main.storyboard in Resources */,
+				15E4BA5F23B864FA00141AA0 /* OcrB Regular.ttf in Resources */,
+				1568902523B63DFC00273BA1 /* mrz.classifier.strong.model.flat in Resources */,
+				1568902723B63DFC00273BA1 /* mrz.traineddata in Resources */,
+				1568902623B63DFC00273BA1 /* mrz.classifier.strong.pca.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15688FFD23B63C7300273BA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1568900C23B63C7300273BA1 /* ViewController.mm in Sources */,
+				1568900923B63C7300273BA1 /* AppDelegate.mm in Sources */,
+				1568900623B63C7300273BA1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1568900D23B63C7300273BA1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1568900E23B63C7300273BA1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1568901223B63C7300273BA1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1568901323B63C7300273BA1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1568901623B63C7300273BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					arm64,
+					armv7s,
+				);
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1568901723B63C7300273BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					arm64,
+					armv7s,
+				);
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1568901923B63C7300273BA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E6F3H8ENQM;
+				FRAMEWORK_SEARCH_PATHS = ../../../binaries/ios/;
+				INFOPLIST_FILE = VideoRecognizer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.doubango.ultimateMRZ.VideoRecognizer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1568901A23B63C7300273BA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = E6F3H8ENQM;
+				FRAMEWORK_SEARCH_PATHS = ../../../binaries/ios/;
+				INFOPLIST_FILE = VideoRecognizer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.doubango.ultimateMRZ.VideoRecognizer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15688FFC23B63C7300273BA1 /* Build configuration list for PBXProject "VideoRecognizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1568901623B63C7300273BA1 /* Debug */,
+				1568901723B63C7300273BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1568901823B63C7300273BA1 /* Build configuration list for PBXNativeTarget "VideoRecognizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1568901923B63C7300273BA1 /* Debug */,
+				1568901A23B63C7300273BA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15688FF923B63C7300273BA1 /* Project object */;
+}

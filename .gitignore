@@ -41,11 +41,9 @@ out
 .externalNativeBuild
 My Amplifier XE Results*
 My Advisor Results*
-/plugin_androidcamera/.idea/libraries
 *.rbg
 /.vs/config
-/thog-trainning/en.thog.training.labels
-/thog-trainning/en.thog.training.vectors
-/thog-trainning/lightgbm-binary.test
-/thog-trainning/lightgbm-binary.train
-/thog-trainning/en.thog.training.pca
+/vs_android/.vs
+/docs/*.odt#
+/vs_android/.workspace
+

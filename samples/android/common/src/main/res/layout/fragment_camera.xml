@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ Copyright (C) 2016-2019 Doubango AI <https://www.doubango.org>
+ License: For non-commercial use only
+ Source code: https://github.com/DoubangoTelecom/ultimateMRZ-SDK
+ WebSite: https://www.doubango.org/webapps/mrz/
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <org.doubango.ultimateMrz.common.MrzAutoFitTextureView
+        android:id="@+id/textureView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <org.doubango.ultimateMrz.common.MrzZoneView
+        android:id="@+id/zoneView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
