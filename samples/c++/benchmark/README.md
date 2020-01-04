@@ -111,7 +111,7 @@ benchmark \
 ```
 Options surrounded with **[]** are optional.
 - `--positive` Path to an image (JPEG/PNG/BMP) with a license plate. This image will be used to evaluate the recognizer. You can use default image at [../../../assets/images/Passport-Australia_1280x720.jpg](../../../assets/images/Passport-Australia_1280x720.jpg).
-- `--negative` Path to an image (JPEG/PNG/BMP) without a license plate. This image will be used to evaluate the decoder. You can use default image at [../../../assets/images/Passport-France_1200x86.jpg](../../../assets/images/Passport-France_1200x86.jpg).
+- `--negative` Path to an image (JPEG/PNG/BMP) without a license plate. This image will be used to evaluate the decoder. You can use default image at [../../../assets/images/Passport-France_1200x864.jpg](../../../assets/images/Passport-France_1200x864.jpg).
 - `--assets` Path to the [assets](../../../assets) folder containing the configuration files and models. Default value is the current folder.
 - `--loops` Number of times to run the processing pipeline.
 - `--rate` Percentage value within[0.0, 1.0] defining the positive rate. The positive rate defines the percentage of images with MRZ lines.
