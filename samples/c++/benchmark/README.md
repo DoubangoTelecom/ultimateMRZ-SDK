@@ -136,7 +136,7 @@ On Android ARM64 you may use the next command:
 ```
 LD_LIBRARY_PATH=../../../binaries/android/jniLibs/arm64-v8a:$LD_LIBRARY_PATH ./benchmark \
     --positive ../../../assets/images/Passport-Australia_1280x720.jpg \
-    --negative ../../../assets/images/Passport-France_1200x864c.jpg \
+    --negative ../../../assets/images/Passport-France_1200x864.jpg \
     --assets ../../../assets \
     --loops 100 \
     --rate 0.2
