@@ -46,11 +46,7 @@ Don't take our word for it, come check our implementation. **No registration, li
 Everything runs on the device, no data is leaving your computer. 
 The code released on [Github](https://github.com/DoubangoTelecom/ultimateMRZ-SDK) comes with many ready-to-use samples to help you get started easily. 
 
-You can also check our online cloud-based implementation (no registration required) at  https://www.doubango.org/webapps/mrz/ to check out the accuracy and precision before starting to play with the SDK.
-
- - Github repo: https://github.com/DoubangoTelecom/ultimateMRZ-SDK
- - Cloud-based implementation: https://www.doubango.org/webapps/mrz/
- 
+You can also check our online cloud-based implementation (no registration required) at  https://www.doubango.org/webapps/mrz/ to check out the accuracy and precision before starting to play with the SDK. 
  
 <a name="Sample-applications"></a>
 # Sample applications # 
