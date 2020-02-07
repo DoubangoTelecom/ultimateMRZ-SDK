@@ -193,7 +193,7 @@ namespace ultimateMrzSdk
 		*/
 		static UltMrzSdkResult deInit();
 
-		/*! Performs ANPR detection and recognition operations.
+		/*! Performs MRZ detection and recognition operations.
 			\param imageType The image type.
 			\param imageData Pointer to the image data.
 			\param imageWidthInSamples Image width in samples.
@@ -210,7 +210,7 @@ namespace ultimateMrzSdk
 			const int imageExifOrientation = 1
 		);
 
-		/*! Performs ANPR detection and recognition operations.
+		/*! Performs MRZ detection and recognition operations.
 			\param imageType The image type.
 			\param yPtr Pointer to the start of the Y (luma) samples.
 			\param uPtr Pointer to the start of the U (chroma) samples.

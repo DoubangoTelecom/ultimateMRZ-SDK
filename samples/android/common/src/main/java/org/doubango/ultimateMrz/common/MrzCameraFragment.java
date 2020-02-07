@@ -32,8 +32,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
-import android.graphics.Matrix;
-import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -58,7 +56,6 @@ import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.Surface;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -73,12 +70,17 @@ import java.util.concurrent.TimeUnit;
 
 import org.doubango.ultimateMrz.videorecognizer.R; // FIXME(dmi): must remove
 
+
 public class MrzCameraFragment extends Fragment
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     static final int REQUEST_CAMERA_PERMISSION = 1;
 
     static final String FRAGMENT_DIALOG = "dialog";
+
+    static final String TAG = MrzCameraFragment.class.getCanonicalName();
+
+    static final int VIDEO_FORMAT = ImageFormat.YUV_420_888; // All Android devices are required to support this format
 
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
@@ -88,12 +90,8 @@ public class MrzCameraFragment extends Fragment
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
 
-    static final String TAG = MrzCameraFragment.class.getCanonicalName();
-
-    static final int VIDEO_FORMAT = ImageFormat.YUV_420_888; // All Android devices are required to support this format
-
     /**
-     * Using #3: preparing, processing and pending.
+     * Using #2: processing and pending.
      */
     static final int MAX_IMAGES = 3;
 
@@ -110,10 +108,12 @@ public class MrzCameraFragment extends Fragment
      */
     private String mCameraId;
 
+    private int mJpegOrientation = 1;
+
     /**
-     * An {@link MrzAutoFitTextureView} for camera preview.
+     * An {@link MrzGLSurfaceView} for camera preview.
      */
-    private MrzAutoFitTextureView mTextureView;
+    private MrzGLSurfaceView mGLSurfaceView;
 
     private MrzZoneView mZoneView;
 
@@ -134,37 +134,9 @@ public class MrzCameraFragment extends Fragment
 
     private MrzCameraFragmentSink mSink;
 
-    private int mJpegOrientation = 1;
-
     private final MrzBackgroundTask mBackgroundTaskCamera = new MrzBackgroundTask();
-
-    /**
-     * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a
-     * {@link TextureView}.
-     */
-    private final TextureView.SurfaceTextureListener mSurfaceTextureListener
-            = new TextureView.SurfaceTextureListener() {
-
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-            openCamera(width, height);
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int width, int height) {
-            configureTransform(width, height);
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture texture) {
-            return true;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture texture) {
-        }
-
-    };
+    private final MrzBackgroundTask mBackgroundTaskDrawing = new MrzBackgroundTask();
+    private final MrzBackgroundTask mBackgroundTaskInference = new MrzBackgroundTask();
 
     /**
      * {@link CameraDevice.StateCallback} is called when {@link CameraDevice} changes its state.
@@ -205,6 +177,8 @@ public class MrzCameraFragment extends Fragment
      */
     private ImageReader mImageReaderInference;
 
+    private ImageReader mImageReaderDrawing;
+
 
     /**
      * This a callback object for the {@link ImageReader}. "onImageAvailable" will be called when a
@@ -225,9 +199,13 @@ public class MrzCameraFragment extends Fragment
                     return;
                 }
 
-                // Forward the image to the sink for recognition
-                // Up to the sink to close the image when done
-                mSink.setImage(image, mJpegOrientation);
+                final boolean isForDrawing = (reader.getSurface() == mImageReaderDrawing.getSurface());
+                if (isForDrawing) {
+                    /*mBackgroundTaskDrawing.post(() ->*/ mGLSurfaceView.setImage(image, mJpegOrientation)/*)*/;
+                }
+                else {
+                    /*mBackgroundTaskInference.post(() ->*/ mSink.setImage(image, mJpegOrientation)/*)*/;
+                }
 
             } catch (final Exception e) {
                 e.printStackTrace();
@@ -283,7 +261,7 @@ public class MrzCameraFragment extends Fragment
 
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
-        mTextureView = (MrzAutoFitTextureView) view.findViewById(R.id.textureView);
+        mGLSurfaceView = (MrzGLSurfaceView) view.findViewById(R.id.glSurfaceView);
         mZoneView = (MrzZoneView) view.findViewById(R.id.zoneView);
         //mZoneView.setBackgroundColor(Color.RED);
     }
@@ -303,15 +281,8 @@ public class MrzCameraFragment extends Fragment
             mSink.setMrzZoneView(mZoneView);
         }
 
-        // When the screen is turned off and turned back on, the SurfaceTexture is already
-        // available, and "onSurfaceTextureAvailable" will not be called. In that case, we can open
-        // a camera and start preview from here (otherwise, we wait until the surface is ready in
-        // the SurfaceTextureListener).
-        if (mTextureView.isAvailable()) {
-            openCamera(mTextureView.getWidth(), mTextureView.getHeight());
-        } else {
-            mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
-        }
+        // Open the camera
+        openCamera(mGLSurfaceView.getWidth(), mGLSurfaceView.getHeight());
     }
 
     @Override
@@ -453,10 +424,10 @@ public class MrzCameraFragment extends Fragment
                 // We fit the aspect ratio of TextureView to the size of preview we picked.
                 final int orientation = getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    mTextureView.setAspectRatio(mPreviewSize.getWidth(), mPreviewSize.getHeight());
+                    mGLSurfaceView.setAspectRatio(mPreviewSize.getWidth(), mPreviewSize.getHeight());
                     mZoneView.setAspectRatio(mPreviewSize.getWidth(), mPreviewSize.getHeight());
                 } else {
-                    mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    mGLSurfaceView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
                     mZoneView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
                 }
 
@@ -483,7 +454,6 @@ public class MrzCameraFragment extends Fragment
             return;
         }
         setUpCameraOutputs();
-        configureTransform(width, height);
         Activity activity = getActivity();
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -518,6 +488,10 @@ public class MrzCameraFragment extends Fragment
                 mImageReaderInference.close();
                 mImageReaderInference = null;
             }
+            if (null != mImageReaderDrawing) {
+                mImageReaderDrawing.close();
+                mImageReaderDrawing = null;
+            }
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera closing.", e);
         } finally {
@@ -530,6 +504,8 @@ public class MrzCameraFragment extends Fragment
      * Starts a background threads
      */
     private void startBackgroundThreads() {
+        mBackgroundTaskInference.start("InferenceBackgroundThread");
+        mBackgroundTaskDrawing.start("DrawingBackgroundThread");
         mBackgroundTaskCamera.start("CameraBackgroundThread");
     }
 
@@ -537,6 +513,8 @@ public class MrzCameraFragment extends Fragment
      * Stops the background threads
      */
     private void stopBackgroundThreads() {
+        mBackgroundTaskInference.stop();
+        mBackgroundTaskDrawing.stop();
         mBackgroundTaskCamera.stop();
     }
 
@@ -551,10 +529,10 @@ public class MrzCameraFragment extends Fragment
             mImageReaderInference.setOnImageAvailableListener(
                     mOnImageAvailableListener, mBackgroundTaskCamera.getHandler());
 
-            SurfaceTexture texture = mTextureView.getSurfaceTexture();
-            assert texture != null;
-            texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-            Surface surface = new Surface(texture);
+            mImageReaderDrawing = ImageReader.newInstance(mPreviewSize.getWidth(), mPreviewSize.getHeight(),
+                    VIDEO_FORMAT, MAX_IMAGES);
+            mImageReaderDrawing.setOnImageAvailableListener(
+                    mOnImageAvailableListener, mBackgroundTaskCamera.getHandler());
 
             // We set up a CaptureRequest.Builder with the output Surface to the image reader
             mCaptureRequestBuilder
@@ -565,10 +543,10 @@ public class MrzCameraFragment extends Fragment
             //mCaptureRequestBuilder.set(CaptureRequest.CONTROL_SCENE_MODE,
             //        CaptureRequest.CONTROL_SCENE_MODE_HIGH_SPEED_VIDEO);
             mCaptureRequestBuilder.addTarget(mImageReaderInference.getSurface());
-            mCaptureRequestBuilder.addTarget(surface);
+            mCaptureRequestBuilder.addTarget(mImageReaderDrawing.getSurface());
 
             // Here, we create a CameraCaptureSession
-            mCameraDevice.createCaptureSession(Arrays.asList(mImageReaderInference.getSurface(), surface),
+            mCameraDevice.createCaptureSession(Arrays.asList(mImageReaderInference.getSurface(), mImageReaderDrawing.getSurface()),
                     new CameraCaptureSession.StateCallback() {
 
                         @Override
@@ -584,7 +562,7 @@ public class MrzCameraFragment extends Fragment
                                 // Auto focus should be continuous
                                 mCaptureRequestBuilder.set(
                                         CaptureRequest.CONTROL_AF_MODE,
-                                        CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_VIDEO);
+                                        CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
                                 // Flash is automatically enabled when necessary.
                                 mCaptureRequestBuilder.set(
                                         CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
@@ -612,40 +590,6 @@ public class MrzCameraFragment extends Fragment
     }
 
     /**
-     * Configures the necessary {@link android.graphics.Matrix} transformation to `mTextureView`.
-     * This method should be called after the camera preview size is determined in
-     * setUpCameraOutputs and also the size of `mTextureView` is fixed.
-     *
-     * @param viewWidth  The width of `mTextureView`
-     * @param viewHeight The height of `mTextureView`
-     */
-    private void configureTransform(int viewWidth, int viewHeight) {
-        Activity activity = getActivity();
-        if (null == mTextureView || null == mPreviewSize || null == activity) {
-            return;
-        }
-        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-        Matrix matrix = new Matrix();
-        RectF viewRect = new RectF(0, 0, viewWidth, viewHeight);
-        RectF bufferRect = new RectF(0, 0, mPreviewSize.getHeight(), mPreviewSize.getWidth());
-        float centerX = viewRect.centerX();
-        float centerY = viewRect.centerY();
-        if (Surface.ROTATION_90 == rotation || Surface.ROTATION_270 == rotation) {
-            bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY());
-            matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL);
-            float scale = Math.max(
-                    (float) viewHeight / mPreviewSize.getHeight(),
-                    (float) viewWidth / mPreviewSize.getWidth());
-            matrix.postScale(scale, scale, centerX, centerY);
-            matrix.postRotate(90 * (rotation - 2), centerX, centerY);
-        } else if (Surface.ROTATION_180 == rotation) {
-            matrix.postRotate(180, centerX, centerY);
-        }
-
-        mTextureView.setTransform(matrix);
-    }
-
-    /**
      *
      */
     public static interface MrzCameraFragmentSink {
@@ -659,6 +603,7 @@ public class MrzCameraFragment extends Fragment
         /**
          *
          * @param image
+         * @param jpegOrientation
          */
         public void setImage(@NonNull final Image image, final int jpegOrientation);
     }
