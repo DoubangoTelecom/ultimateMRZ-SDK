@@ -40,6 +40,8 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
 
     private boolean mIsProcessing = false;
 
+    private boolean mIsPaused = true;
+
     private MrzZoneView mMrzZoneView;
 
     private final MrzBackgroundTask mBackgroundTaskInference = new MrzBackgroundTask();
@@ -118,11 +120,13 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
     public synchronized void onResume() {
         super.onResume();
 
+        mIsPaused = false;
         mBackgroundTaskInference.start("mBackgroundTaskInference");
     }
 
     @Override
     public synchronized void onPause() {
+        mIsPaused = true;
         mBackgroundTaskInference.stop();
 
         super.onPause();
@@ -146,7 +150,7 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
     @Override
     public void setImage(@NonNull final Image image, final int jpegOrientation) {
 
-        if (mIsProcessing || !mBackgroundTaskInference.isRunning()) {
+        if (mIsProcessing || !mBackgroundTaskInference.isRunning() || mIsPaused) {
             image.close();
             return;
         }
