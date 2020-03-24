@@ -64,20 +64,17 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
         dummyFile.delete();
 
         // Init the engine
-        final boolean isActivationPossible = !getActivationServerUrl().isEmpty() && !getActivationMasterOrSlaveKey().isEmpty();
         final JSONObject config = getJsonConfig();
-        String tokenFile = "";
-        if (isActivationPossible) {
-            // Retrieve previously stored key from internal storage
-            tokenFile = MrzLicenseActivator.tokenFile(this);
-            if (!tokenFile.isEmpty()) {
-                try {
-                    config.put("license_token_data", MrzLicenseActivator.tokenData(tokenFile));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+        // Retrieve previously stored key from internal storage
+        String tokenFile = MrzLicenseActivator.tokenFile(this);
+        if (!tokenFile.isEmpty()) {
+            try {
+                config.put("license_token_data", MrzLicenseActivator.tokenData(tokenFile));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
+
         final UltMrzSdkResult mrzResult = MrzUtils.assertIsOk(UltMrzSdkEngine.init(
                 getAssets(),
                 config.toString()
@@ -85,6 +82,7 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
         Log.i(TAG,"MRZ engine initialized: " + MrzUtils.resultToString(mrzResult));
 
         // Activate the license
+        final boolean isActivationPossible = !getActivationServerUrl().isEmpty() && !getActivationMasterOrSlaveKey().isEmpty();
         if (isActivationPossible && tokenFile.isEmpty()) {
             // Generate the license key and store it to the internal storage for next times
             tokenFile = MrzLicenseActivator.activate(this, getActivationServerUrl(), getActivationMasterOrSlaveKey(), false);
