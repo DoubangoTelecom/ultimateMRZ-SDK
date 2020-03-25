@@ -87,7 +87,7 @@ namespace ultimateMrzSdk
 		*/
 		ULTMRZ_SDK_IMAGE_TYPE_RGBA32,
 		/*! Each pixel is stored on 4 bytes. Each channel (B, G, R, A) is stored with 8 bits (1 byte) of precision (256 possible values).
-		* The R channel is stored at the lowest memory address followed by G, B then A channels. If you're using iOS then,
+		* The B channel is stored at the lowest memory address followed by G, R then A channels. If you're using iOS then,
 		* this is the same as <a href="https://developer.apple.com/documentation/corevideo/1563591-pixel_format_identifiers/kcvpixelformattype_32bgra?language=objc">kCVPixelFormatType_32BGRA</a>.
 		* Here is how the pixels are packed:
 		* \code{.cpp}
