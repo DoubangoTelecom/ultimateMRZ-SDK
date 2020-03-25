@@ -34,11 +34,10 @@ You can use our implementation to extract information from **local identity card
 
 In addition to being highly accurate our implementation is very fast and can run at up to **50fps on ARM devices** (iPhone7) and **114fps on x86_64** (Core i7-4790K) using HD images (**720p**). See [benchmark section](https://www.doubango.org/SDKs/mrz/docs/Benchmark.html) for more information.
 
-<p align="center" style="text-align: center">
-  <img src="https://www.doubango.org/SDKs/mrz/docs/_images/Screenshot_20191231-160311_MrzVideoRecognizer.jpg">
-  <br />
-  <em><u><a href="#Sample-applications-Video-Recognizer">VideoRecognizer sample application</a> on Android</u></em>
-</p>
+Next [video](https://youtu.be/BBI_3AJIc1c) ([https://youtu.be/AO5XdbLK9Do](https://youtu.be/AO5XdbLK9Do)) shows [VideoRecognizer sample](#Sample-applications-Video-Recognizer) Running on Android: <br />
+[![VideoRecognizer Running on Android](https://www.doubango.org/SDKs/mrz/docs/_images/Screenshot_20191231-160311_MrzVideoRecognizer.jpg)](https://www.youtube.com/watch?v=AO5XdbLK9Do)
+   
+<hr />
 
 The Github repository contains the SDK binaries for **Android**, **iOS**, **Raspberry Pi** and **Windows**. You can contact us if you want binaries for other platforms.
 
@@ -46,7 +45,11 @@ Don't take our word for it, come check our implementation. **No registration, li
 Everything runs on the device, no data is leaving your computer. 
 The code released on [Github](https://github.com/DoubangoTelecom/ultimateMRZ-SDK) comes with many ready-to-use samples to help you get started easily. 
 
-You can also check our online cloud-based implementation (no registration required) at  https://www.doubango.org/webapps/mrz/ to check out the accuracy and precision before starting to play with the SDK. 
+You can also check our online cloud-based implementation (no registration required) at  https://www.doubango.org/webapps/mrz/ to check out the accuracy and precision before starting to play with the SDK.
+
+ - Github repo: https://github.com/DoubangoTelecom/ultimateMRZ-SDK
+ - Cloud-based implementation: https://www.doubango.org/webapps/mrz/
+ 
  
 <a name="Sample-applications"></a>
 # Sample applications # 
