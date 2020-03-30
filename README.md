@@ -34,7 +34,7 @@ You can use our implementation to extract information from **local identity card
 
 In addition to being highly accurate our implementation is very fast and can run at up to **50fps on ARM devices** (iPhone7) and **114fps on x86_64** (Core i7-4790K) using HD images (**720p**). See [benchmark section](https://www.doubango.org/SDKs/mrz/docs/Benchmark.html) for more information.
 
-Next [video](https://youtu.be/BBI_3AJIc1c) ([https://youtu.be/AO5XdbLK9Do](https://youtu.be/AO5XdbLK9Do)) shows [VideoRecognizer sample](#Sample-applications-Video-Recognizer) Running on Android: <br />
+Next [video](https://youtu.be/AO5XdbLK9Do) ([https://youtu.be/AO5XdbLK9Do](https://youtu.be/AO5XdbLK9Do)) shows [VideoRecognizer sample](#Sample-applications-Video-Recognizer) Running on Android: <br />
 [![VideoRecognizer Running on Android](https://www.doubango.org/SDKs/mrz/docs/_images/Screenshot_20191231-160311_MrzVideoRecognizer.jpg)](https://www.youtube.com/watch?v=AO5XdbLK9Do)
    
 <hr />
