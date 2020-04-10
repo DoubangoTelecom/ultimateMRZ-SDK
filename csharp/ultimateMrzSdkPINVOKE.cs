@@ -34,7 +34,7 @@ class ultimateMrzSdkPINVOKE {
     static ExceptionArgumentDelegate argumentNullDelegate = new ExceptionArgumentDelegate(SetPendingArgumentNullException);
     static ExceptionArgumentDelegate argumentOutOfRangeDelegate = new ExceptionArgumentDelegate(SetPendingArgumentOutOfRangeException);
 
-    [DllImport("ultimateMrzSdk", EntryPoint="SWIGRegisterExceptionCallbacks_ultimateMrzSdk")]
+    [DllImport("ultimateMRZ-SDK", EntryPoint="SWIGRegisterExceptionCallbacks_ultimateMrzSdk")]
     public static extern void SWIGRegisterExceptionCallbacks_ultimateMrzSdk(
                                 ExceptionDelegate applicationDelegate,
                                 ExceptionDelegate arithmeticDelegate,
@@ -48,7 +48,7 @@ class ultimateMrzSdkPINVOKE {
                                 ExceptionDelegate overflowDelegate, 
                                 ExceptionDelegate systemExceptionDelegate);
 
-    [DllImport("ultimateMrzSdk", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_ultimateMrzSdk")]
+    [DllImport("ultimateMRZ-SDK", EntryPoint="SWIGRegisterExceptionArgumentCallbacks_ultimateMrzSdk")]
     public static extern void SWIGRegisterExceptionCallbacksArgument_ultimateMrzSdk(
                                 ExceptionArgumentDelegate argumentDelegate,
                                 ExceptionArgumentDelegate argumentNullDelegate,
@@ -170,7 +170,7 @@ class ultimateMrzSdkPINVOKE {
     public delegate string SWIGStringDelegate(string message);
     static SWIGStringDelegate stringDelegate = new SWIGStringDelegate(CreateString);
 
-    [DllImport("ultimateMrzSdk", EntryPoint="SWIGRegisterStringCallback_ultimateMrzSdk")]
+    [DllImport("ultimateMRZ-SDK", EntryPoint="SWIGRegisterStringCallback_ultimateMrzSdk")]
     public static extern void SWIGRegisterStringCallback_ultimateMrzSdk(SWIGStringDelegate stringDelegate);
 
     static string CreateString(string cString) {
@@ -189,73 +189,73 @@ class ultimateMrzSdkPINVOKE {
   }
 
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MAJOR_get")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MAJOR_get")]
   public static extern int ULTMRZ_SDK_VERSION_MAJOR_get();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MINOR_get")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MINOR_get")]
   public static extern int ULTMRZ_SDK_VERSION_MINOR_get();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MICRO_get")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_ULTMRZ_SDK_VERSION_MICRO_get")]
   public static extern int ULTMRZ_SDK_VERSION_MICRO_get();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_0")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_0")]
   public static extern IntPtr new_UltMrzSdkResult__SWIG_0(int jarg1, string jarg2, string jarg3, uint jarg4);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_1")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_1")]
   public static extern IntPtr new_UltMrzSdkResult__SWIG_1(int jarg1, string jarg2, string jarg3);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_delete_UltMrzSdkResult")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_delete_UltMrzSdkResult")]
   public static extern void delete_UltMrzSdkResult(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkResult_code")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkResult_code")]
   public static extern int UltMrzSdkResult_code(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkResult_phrase")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkResult_phrase")]
   public static extern string UltMrzSdkResult_phrase(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkResult_json")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkResult_json")]
   public static extern string UltMrzSdkResult_json(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkResult_numZones")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkResult_numZones")]
   public static extern uint UltMrzSdkResult_numZones(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkResult_isOK")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkResult_isOK")]
   public static extern bool UltMrzSdkResult_isOK(HandleRef jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_init__SWIG_0")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_init__SWIG_0")]
   public static extern IntPtr UltMrzSdkEngine_init__SWIG_0(string jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_init__SWIG_1")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_init__SWIG_1")]
   public static extern IntPtr UltMrzSdkEngine_init__SWIG_1();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_deInit")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_deInit")]
   public static extern IntPtr UltMrzSdkEngine_deInit();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_0")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_0")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_0(int jarg1, IntPtr jarg2, uint jarg3, uint jarg4, uint jarg5, int jarg6);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_1")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_1")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_1(int jarg1, IntPtr jarg2, uint jarg3, uint jarg4, uint jarg5);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_2")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_2")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_2(int jarg1, IntPtr jarg2, uint jarg3, uint jarg4);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_3")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_3")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_3(int jarg1, IntPtr jarg2, IntPtr jarg3, IntPtr jarg4, uint jarg5, uint jarg6, uint jarg7, uint jarg8, uint jarg9, uint jarg10, int jarg11);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_4")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_4")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_4(int jarg1, IntPtr jarg2, IntPtr jarg3, IntPtr jarg4, uint jarg5, uint jarg6, uint jarg7, uint jarg8, uint jarg9, uint jarg10);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_5")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_5")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_5(int jarg1, IntPtr jarg2, IntPtr jarg3, IntPtr jarg4, uint jarg5, uint jarg6, uint jarg7, uint jarg8, uint jarg9);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0")]
   public static extern IntPtr UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0(bool jarg1);
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_1")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_1")]
   public static extern IntPtr UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_1();
 
-  [DllImport("ultimateMrzSdk", EntryPoint="CSharp_delete_UltMrzSdkEngine")]
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_delete_UltMrzSdkEngine")]
   public static extern void delete_UltMrzSdkEngine(HandleRef jarg1);
 }
 
