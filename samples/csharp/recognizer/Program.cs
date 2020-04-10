@@ -171,19 +171,19 @@ namespace recognizer
                 throw new Exception("--image required");
             }
             // Extract assets folder
-            // https://www.doubango.org/SDKs/anpr/docs/Configuration_options.html#assets-folder
+            // https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#assets-folder
             String assetsFolder = parameters.ContainsKey("--assets")
                 ? parameters["--assets"] : String.Empty;
 
             // License data - Optional
-            // https://www.doubango.org/SDKs/anpr/docs/Configuration_options.html#license-token-data
+            // https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#license-token-data
             String tokenDataBase64 = parameters.ContainsKey("--tokendata")
                 ? parameters["--tokendata"] : String.Empty;
 
             // Initialize the engine: Load deep learning models and init GPU shaders
             // Make sure de disable VS hosting process to see logs from native code: https://social.msdn.microsoft.com/Forums/en-US/5da6cdb2-bc2b-4fff-8adf-752b32143dae/printf-from-dll-in-console-app-in-visual-studio-c-2010-express-does-not-output-to-console-window?forum=Vsexpressvcs
             // This function should be called once.
-            // https://www.doubango.org/SDKs/anpr/docs/Configuration_options.html#recogn-rectify-enabled
+            // https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine4initEPKc
             UltMrzSdkResult result = CheckResult("Init", UltMrzSdkEngine.init(BuildJSON(assetsFolder, tokenDataBase64)));
 
             // Decode the JPEG/PNG/BMP file
@@ -256,7 +256,7 @@ namespace recognizer
             return result;
         }
 
-        // https://www.doubango.org/SDKs/anpr/docs/Configuration_options.html
+        // https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
         static String BuildJSON(String assetsFolder = "", String tokenDataBase64 = "")
         {
             return new JavaScriptSerializer().Serialize(new
