@@ -1,4 +1,4 @@
-/* Copyright (C) 2016-2019 Doubango Telecom <https://www.doubango.org>
+/* Copyright (C) 2011-2020 Doubango Telecom <https://www.doubango.org>
 * File author: Mamadou DIOP (Doubango Telecom, France).
 * License: For non commercial use only.
 * Source code: https://github.com/DoubangoTelecom/ultimateMRZ-SDK
@@ -15,7 +15,7 @@ ultimateMRZ-SDK public header
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
 #define ULTMRZ_SDK_VERSION_MINOR		0
-#define ULTMRZ_SDK_VERSION_MICRO		0
+#define ULTMRZ_SDK_VERSION_MICRO		1
 
 // Windows's symbols export
 #if defined(SWIG)
@@ -87,7 +87,7 @@ namespace ultimateMrzSdk
 		*/
 		ULTMRZ_SDK_IMAGE_TYPE_RGBA32,
 		/*! Each pixel is stored on 4 bytes. Each channel (B, G, R, A) is stored with 8 bits (1 byte) of precision (256 possible values).
-		* The R channel is stored at the lowest memory address followed by G, B then A channels. If you're using iOS then,
+		* The B channel is stored at the lowest memory address followed by G, R then A channels. If you're using iOS then,
 		* this is the same as <a href="https://developer.apple.com/documentation/corevideo/1563591-pixel_format_identifiers/kcvpixelformattype_32bgra?language=objc">kCVPixelFormatType_32BGRA</a>.
 		* Here is how the pixels are packed:
 		* \code{.cpp}
