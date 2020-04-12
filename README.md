@@ -267,6 +267,7 @@ The C++ API is defined at https://www.doubango.org/SDKs/mrz/docs/cpp-api.html.
  ### iOS, Windows, Raspberry Pi and Others (C++) ###
 
 ```cpp
+	#include <ultimateMRZ-SDK-API-PUBLIC.h> // C++ API: https://www.doubango.org/SDKs/mrz/docs/cpp-api.html
 
 	// JSON configuration string
 	// More info at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
