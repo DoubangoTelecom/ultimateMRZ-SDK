@@ -21,7 +21,7 @@
 		
 */
 
-#include <ultimateMRZ-SDK-API-PUBLIC.h>
+#include <ultimateMRZ-SDK-API-PUBLIC.h> // C++ API: https://www.doubango.org/SDKs/mrz/docs/cpp-api.html
 #include <assert.h>
 #include <stdlib.h>
 #include <sys/stat.h>
