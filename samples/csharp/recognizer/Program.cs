@@ -187,7 +187,12 @@ namespace recognizer
             UltMrzSdkResult result = CheckResult("Init", UltMrzSdkEngine.init(BuildJSON(assetsFolder, tokenDataBase64)));
 
             // Decode the JPEG/PNG/BMP file
-            Bitmap image = new Bitmap(parameters["--image"]);
+            String file = parameters["--image"];
+            if (!System.IO.File.Exists(file))
+            {
+                throw new System.IO.FileNotFoundException("File not found:" + file);
+            }
+            Bitmap image = new Bitmap(file);
 
             // Processing: Detection + recognition
             // First inference is expected to be slow (deep learning models mapping to CPU/GPU memory)

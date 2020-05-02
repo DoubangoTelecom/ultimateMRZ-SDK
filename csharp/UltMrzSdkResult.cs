@@ -41,10 +41,17 @@ public class UltMrzSdkResult : IDisposable {
     }
   }
 
-  public UltMrzSdkResult(int code, string phrase, string json, uint numZones) : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_0(code, phrase, json, numZones), true) {
+  public UltMrzSdkResult() : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_0(), true) {
   }
 
-  public UltMrzSdkResult(int code, string phrase, string json) : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_1(code, phrase, json), true) {
+  public UltMrzSdkResult(int code, string phrase, string json, uint numZones) : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_1(code, phrase, json, numZones), true) {
+  }
+
+  public UltMrzSdkResult(int code, string phrase, string json) : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_2(code, phrase, json), true) {
+  }
+
+  public UltMrzSdkResult(UltMrzSdkResult other) : this(ultimateMrzSdkPINVOKE.new_UltMrzSdkResult__SWIG_3(UltMrzSdkResult.getCPtr(other)), true) {
+    if (ultimateMrzSdkPINVOKE.SWIGPendingException.Pending) throw ultimateMrzSdkPINVOKE.SWIGPendingException.Retrieve();
   }
 
   public int code() {

@@ -1,3 +1,4 @@
+- [Pre-built binaries](#prebuilt)
 - [Building](#building)
 - [Testing](#testing)
   - [Usage](#testing-usage)
@@ -14,11 +15,29 @@ our cloud-based solution at [https://www.doubango.org/webapps/mrz/](https://www.
 
 This sample is open source and doesn't require registration or license key.
 
+<a name="prebuilt"></a>
+# Pre-built binaries #
+
+If you don't want to build this sample by yourself then, use the pre-built C++ versions:
+ - Windows: [recognizer.exe](../../../binaries/windows/x86_64/recognizer.exe) under [binaries/windows/x86_64](../../../binaries/windows/x86_64)
+ - Linux: [recognizer](../../../binaries/linux/x86_64/recognizer) under [binaries/linux/x86_64](../../../binaries/linux/x86_64). Built on Ubuntu 18.
+ - Raspberry Pi: [recognizer](../../../binaries/raspbian/armv7l/recognizer) under [binaries/raspbian/armv7l](../../../binaries/raspbian/armv7l)
+ - Android: check [android](../../android) folder
+ - iOS: check [ios](../../ios) folder
+ 
+On **Windows**, the easiest way to try this sample is to navigate to [binaries/windows/x86_64](../../../binaries/windows/x86_64/) and run [binaries/windows/x86_64/recognizer.bat](../../../binaries/windows/x86_64/recognizer.bat). You can edit these files to use your own images and configuration options.
+
 <a name="building"></a>
 # Building #
 
-This sample contains [a single C# source file](Program.cs) and is easy to build using Visual Studio. Open the [VS solution](recognizer.sln) and run the project.
-The Visual Studio project is configured for Win64, you have to change the settings for other platforms.
+This sample contains [a single C# source file](Program.cs).
+
+You'll need Visual Studio to build the code. The VS project is at [recognizer.vcxproj](recognizer.vcxproj). Open it.
+ - You will need to change the **"Command line arguments"** like the [below image](../../../VC#_config.jpg). Default value: `--assets "$(ProjectDir)..\..\..\assets" --image "$(ProjectDir)..\..\..\assets\images\Czech_passport_2005_MRZ_orient1_1300x1002.jpg"`
+ 
+![VC# config](../../../VCsharp_config.jpg)
+ 
+You're now ready to build and run the sample.
 
 <a name="testing-usage"></a>
 ## Usage ##

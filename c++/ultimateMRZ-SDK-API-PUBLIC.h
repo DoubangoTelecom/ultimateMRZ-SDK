@@ -14,8 +14,8 @@ ultimateMRZ-SDK public header
 #include <string>
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
-#define ULTMRZ_SDK_VERSION_MINOR		0
-#define ULTMRZ_SDK_VERSION_MICRO		1
+#define ULTMRZ_SDK_VERSION_MINOR		1
+#define ULTMRZ_SDK_VERSION_MICRO		0
 
 // Windows's symbols export
 #if defined(SWIG)
@@ -120,29 +120,34 @@ namespace ultimateMrzSdk
 		/*!  YUV 4:4:4 image with an NxM Y plane followed by NxM V and U planes.
 		*/
 		ULTMRZ_SDK_IMAGE_TYPE_YUV444P,
+		/*! Grayscale image with single channel (luminance only). Each pixel is stored in single byte (8 bit Y samples).
+		*
+		* Available since: 2.1.0
+		*/
+		ULTMRZ_SDK_IMAGE_TYPE_Y,
 	};
 
 	/*! Result returned by the \ref UltMrzSdkEngine "engine" at initialization, deInitialization and processing stages.
 	*/
-	class UltMrzSdkResult {
+	class ULTIMATE_MRZ_SDK_PUBLIC_API UltMrzSdkResult {
 	public:
+		UltMrzSdkResult();
+		UltMrzSdkResult(const int code, const char* phrase, const char* json, const size_t numZones = 0);
+		UltMrzSdkResult(const UltMrzSdkResult& other);
+		virtual ~UltMrzSdkResult();
 #if !defined(SWIG)
-		UltMrzSdkResult() = delete;
-#endif /* SWIG */
-		UltMrzSdkResult(const int code, const char* phrase, const char* json, const size_t numZones = 0)
-		: code_(code), phrase_(phrase), json_(json), numZones_(numZones) {}
-		
-		virtual ~UltMrzSdkResult() {}
+		UltMrzSdkResult& operator=(const UltMrzSdkResult& other) { return operatorAssign(other); }
+#endif
 
 		/*! The result code. 0 if success, nonzero otherwise.
 		*/
 		inline int code()const { return code_; }
 		/*! Short description for the \ref code.
 		*/
-		inline const char* phrase()const { return phrase_.c_str(); }
+		inline const char* phrase()const { return phrase_; }
 		/*! The MRZ zones as JSON content string. May be null if no zone found.
 		*/
-		inline const char* json()const { return json_.c_str(); }
+		inline const char* json()const { return json_; }
 		/*! Number of zones in \ref json string. This is a helper function to quickly check whether the result contains zones
 			without parsing the \ref json string.
 		*/
@@ -154,10 +159,17 @@ namespace ultimateMrzSdk
 		static UltMrzSdkResult bodyless(const int code, const char* phrase) { return UltMrzSdkResult(code, phrase, ""); }
 		static UltMrzSdkResult bodylessOK() { return UltMrzSdkResult(0, "OK", ""); }
 #endif /* SWIG */
+
+	private:
+		void ctor(const int code, const char* phrase, const char* json, const size_t numZones);
+#if !defined(SWIG)
+		UltMrzSdkResult& operatorAssign(const UltMrzSdkResult& other);
+#endif /* SWIG */
+
 	private:
 		int code_;
-		std::string phrase_;
-		std::string json_;
+		char* phrase_ = nullptr;
+		char* json_ = nullptr;
 		size_t numZones_;
 	};
 

@@ -1,4 +1,4 @@
- - [Sample applications](#Sample-applications)
+﻿ - [Sample applications](#Sample-applications)
     - [Video Recognizer](#Sample-applications-Video-Recognizer)
     - [Benchmark](#Sample-applications-Benchmark)
     - [Parser](#Sample-applications-Parser)
@@ -7,19 +7,20 @@
       - [Android](#Sample-applications-Trying-the-samples-Android)
       - [iOS](#Sample-applications-Trying-the-samples-iOS)
       - [Windows](#Sample-applications-Trying-the-samples-Windows)
-      - [Raspberry Pi and Others](#Sample-applications-Trying-the-samples-Raspberry-Pi-and-Others)
+      - [Raspberry Pi, Linux and Others](#Sample-applications-Trying-the-samples-Raspberry-Pi-and-Others)
 - [Getting-started](#Getting-started)
   - [Adding the SDK to your project](#Getting-started-Adding-the-SDK-to-your-project)
     - [Android](#Getting-started-Adding-the-SDK-to-your-project-Android)
     - [iOS](#Getting-started-Adding-the-SDK-to-your-project-iOS)
-    - [Raspberry Pi, Windows and Others](#Getting-started-Adding-the-SDK-to-your-project-Raspberry-Pi-Windows-and-Others)
+    - [Raspberry Pi, Linux, Windows and Others](#Getting-started-Adding-the-SDK-to-your-project-Raspberry-Pi-Windows-and-Others)
    - [Using the API](#Getting-started-Using-the-API)
      - [Android (Java)](#Getting-started-Using-the-API-Android-Java)
-     - [iOS, Windows, Raspberry Pi and Others (C++)](#Getting-started-Using-the-API-iOS-Windows-Raspberry-Pi-and-Others-Cpp)
+     - [iOS, Windows, Raspberry Pi, Linux and Others (C++)](#Getting-started-Using-the-API-iOS-Windows-Raspberry-Pi-and-Others-Cpp)
  - [Getting help](#technical-questions)
   
  - Full documentation at https://www.doubango.org/SDKs/mrz/docs/
  - Online demo at https://www.doubango.org/webapps/mrz/
+ - Open source Computer Vision library: https://github.com/DoubangoTelecom/compv
   
 <hr />
 
@@ -71,7 +72,7 @@ This application is used to check everything is ok and running as fast as expect
 The information about the maximum frame rate (**50fps** on iPhone7 and **114fps** on core i7) could be checked using this application.
  - For **iOS**, a sample with user interface could be found at [samples/iOS/Benchmark](samples/ios/Benchmark)
  - For **Android**, a sample with user interface could be found at [samples/Android/Benchmark](samples/android/benchmark)
- - For **Raspberry Pi, Windows and Others** a C++ command line application could be found at [samples/c++/benchmark](samples/c++/benchmark)
+ - For **Raspberry Pi, Linux, Windows and Others** a C++ command line application could be found at [samples/c++/benchmark](samples/c++/benchmark)
 
 <a name="Sample-applications-Parser"></a>
 ## Parser ##
@@ -113,7 +114,7 @@ To try the sample applications on iOS just open the corresponding Visual Studio 
 For example, the VS project for the VideoRecognizer sample is at [samples/c++/recognizer/recognizer.vcxproj](samples/c++/recognizer/recognizer.vcxproj).
 
 <a name="Sample-applications-Trying-the-samples-Raspberry-Pi-and-Others"></a>
-### Raspberry Pi and Others ###
+### Raspberry Pi Linux, and Others ###
 For Raspberry Pi and other Linux systems you need to build the sample applications from source. More info at [samples/c++/README.md](samples/c++/README.md).
 
 
@@ -124,7 +125,7 @@ The SDK works on [many platforms](https://www.doubango.org/SDKs/mrz/docs/Archite
 
 <a name="Getting-started-Adding-the-SDK-to-your-project"></a>
 ## Adding the SDK to your project ##
-This Github repository contains [binaries](binaries) for **Android**, **iOS**, **Raspberry Pi** and **Windows**. The next sections explain how to add the SDK to an existing project.
+This Github repository contains [binaries](binaries) for **Android**, **iOS**, **Raspberry Pi**, **Linux** and **Windows**. The next sections explain how to add the SDK to an existing project.
 
 <a name="Getting-started-Adding-the-SDK-to-your-project-Android"></a>
 ### Android ###
@@ -169,7 +170,7 @@ Make sure you're using latest Xcode version. In the next sections we're using **
 That's it.
 
 <a name="Getting-started-Adding-the-SDK-to-your-project-Raspberry-Pi-Windows-and-Others"></a>
-### Raspberry Pi, Windows and Others ###
+### Raspberry Pi, Linux, Windows and Others ###
 
 The shared libraries are under [**ultimateMRZ-SDK/binaries/<platform>**](binaries). The header file at [c++](c++). You can use any C++ compiler/linker.
 
@@ -264,11 +265,11 @@ The C++ API is defined at https://www.doubango.org/SDKs/mrz/docs/cpp-api.html.
  ```
  
  <a name="Getting-started-Using-the-API-iOS-Windows-Raspberry-Pi-and-Others-Cpp"></a>
- ### iOS, Windows, Raspberry Pi and Others (C++) ###
+ ### iOS, Windows, Raspberry Pi, Linux and Others (C++) ###
 
 ```cpp
 	#include <ultimateMRZ-SDK-API-PUBLIC.h> // C++ API: https://www.doubango.org/SDKs/mrz/docs/cpp-api.html
-
+	
 	// JSON configuration string
 	// More info at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
 	static const char* __jsonConfig =

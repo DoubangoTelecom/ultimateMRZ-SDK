@@ -1,4 +1,4 @@
-/* Copyright (C) 2011-2019 Doubango Telecom <https://www.doubango.org>
+/* Copyright (C) 2011-2020 Doubango Telecom <https://www.doubango.org>
 * File author: Mamadou DIOP (Doubango Telecom, France).
 * License: For non commercial use only.
 * Source code: https://github.com/DoubangoTelecom/ultimateMRZ-SDK

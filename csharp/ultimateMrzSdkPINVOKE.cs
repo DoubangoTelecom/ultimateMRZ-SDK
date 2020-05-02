@@ -199,10 +199,16 @@ class ultimateMrzSdkPINVOKE {
   public static extern int ULTMRZ_SDK_VERSION_MICRO_get();
 
   [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_0")]
-  public static extern IntPtr new_UltMrzSdkResult__SWIG_0(int jarg1, string jarg2, string jarg3, uint jarg4);
+  public static extern IntPtr new_UltMrzSdkResult__SWIG_0();
 
   [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_1")]
-  public static extern IntPtr new_UltMrzSdkResult__SWIG_1(int jarg1, string jarg2, string jarg3);
+  public static extern IntPtr new_UltMrzSdkResult__SWIG_1(int jarg1, string jarg2, string jarg3, uint jarg4);
+
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_2")]
+  public static extern IntPtr new_UltMrzSdkResult__SWIG_2(int jarg1, string jarg2, string jarg3);
+
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_new_UltMrzSdkResult__SWIG_3")]
+  public static extern IntPtr new_UltMrzSdkResult__SWIG_3(HandleRef jarg1);
 
   [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_delete_UltMrzSdkResult")]
   public static extern void delete_UltMrzSdkResult(HandleRef jarg1);
