@@ -60,7 +60,7 @@ g++ main.cxx -O3 -o parser
 <a name="building-rpi"></a>
 ## Raspberry Pi (Raspbian OS) ##
 
-To build the sample for Raspberry Pi you can either do it on the device itself or cross compile it on [Windows](#cross-compilation-rpi-install-windows), [Linux](#cross-compilation-rpi-install-ubunt) or OSX machines. 
+To build the sample for Raspberry Pi you can either do it on the device itself or cross compile it on [Windows](../README.md#cross-compilation-rpi-install-windows), [Linux](../README.md#cross-compilation-rpi-install-ubuntu) or OSX machines. 
 For more information on how to install the toolchain for cross compilation please check [here](../README.md#cross-compilation-rpi).
 
 ```
