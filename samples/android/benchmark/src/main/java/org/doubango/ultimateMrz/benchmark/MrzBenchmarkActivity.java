@@ -146,7 +146,7 @@ public class MrzBenchmarkActivity extends AppCompatActivity {
      * JSON name: "roi"
      * Default: [0.f, 0.f, 0.f, 0.f]
      * type: float[4]
-     * pattern: [left, width, top, height]
+     * pattern: [left, right, top, bottom]
      * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#roi
      */
     static final List<Float> CONFIG_ROI = Arrays.asList(0.f, 0.f, 0.f, 0.f);
