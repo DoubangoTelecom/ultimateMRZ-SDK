@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 	int width, height, channels;
 	stbi_uc* uncompressedData = stbi_load_from_file(file, &width, &height, &channels, 0);
 	fclose(file);
-	if (!uncompressedData || !width || !height || (channels != 3 && channels != 4)) {
+	if (!uncompressedData || !width || !height || (channels != 1 && channels != 3 && channels != 4)) {
 		ULTMRZ_SDK_PRINT_ERROR("Invalid file(%s, %d, %d, %d)", pathFileImage.c_str(), width, height, channels);
 		return -1;
 	}
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 	// and initialized which means it will be slow. In your application you've to initialize the engine
 	// once and do all the recognitions you need then, deinitialize it.
 	ULTMRZ_SDK_ASSERT((result = UltMrzSdkEngine::process(
-		channels == 4 ? ULTMRZ_SDK_IMAGE_TYPE_RGBA32 : ULTMRZ_SDK_IMAGE_TYPE_RGB24,
+		channels == 4 ? ULTMRZ_SDK_IMAGE_TYPE_RGBA32 : (channels == 1 ? ULTMRZ_SDK_IMAGE_TYPE_Y : ULTMRZ_SDK_IMAGE_TYPE_RGB24),
 		uncompressedData,
 		static_cast<size_t>(width),
 		static_cast<size_t>(height)
