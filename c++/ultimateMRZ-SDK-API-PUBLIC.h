@@ -14,7 +14,7 @@ ultimateMRZ-SDK public header
 #include <string>
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
-#define ULTMRZ_SDK_VERSION_MINOR		1
+#define ULTMRZ_SDK_VERSION_MINOR		2
 #define ULTMRZ_SDK_VERSION_MICRO		0
 
 // Windows's symbols export
@@ -261,6 +261,8 @@ namespace ultimateMrzSdk
 
 #if ULTMRZ_SDK_OS_ANDROID && !defined(SWIG)
 		static void setAssetManager(AAssetManager* assetManager);
+	private:
+		static bool s_bOweAAssetManager;
 #endif /* ULTMRZ_SDK_OS_ANDROID */
 	};
 
