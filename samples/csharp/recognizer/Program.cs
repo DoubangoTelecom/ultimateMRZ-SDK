@@ -194,6 +194,18 @@ namespace recognizer
             }
             Bitmap image = new Bitmap(file);
 
+            // Extract Exif orientation
+            const int ExifOrientationTagId = 0x112;
+            int orientation = 1;
+            if (Array.IndexOf(image.PropertyIdList, ExifOrientationTagId) > -1)
+            {
+                int orientation_ = image.GetPropertyItem(ExifOrientationTagId).Value[0];
+                if (orientation_ >= 1 && orientation_ <= 8)
+                {
+                    orientation = orientation_;
+                }
+            }
+
             // Processing: Detection + recognition
             // First inference is expected to be slow (deep learning models mapping to CPU/GPU memory)
             BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -205,7 +217,9 @@ namespace recognizer
                         ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_RGB24, // TODO(dmi): not correct. C# image decoder outputs BGR24 instead of RGB24
                         imageData.Scan0,
                         (uint)image.Width,
-                        (uint)image.Height
+                        (uint)image.Height,
+                        0, // stride
+                        orientation
                     ));
                 // Print result to console
                 Console.WriteLine("Result: {0}", result.json());
@@ -284,6 +298,6 @@ namespace recognizer
                 assets_folder = assetsFolder,
                 license_token_data = tokenDataBase64,
             });
-        }        
+        }
     }
 }
