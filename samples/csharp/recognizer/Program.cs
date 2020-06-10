@@ -193,6 +193,11 @@ namespace recognizer
                 throw new System.IO.FileNotFoundException("File not found:" + file);
             }
             Bitmap image = new Bitmap(file);
+            int bytesPerPixel = Image.GetPixelFormatSize(image.PixelFormat) >> 3;
+            if (bytesPerPixel != 1 && bytesPerPixel != 3 && bytesPerPixel != 4)
+            {
+                throw new System.Exception("Invalid BPP:" + bytesPerPixel);
+            }
 
             // Extract Exif orientation
             const int ExifOrientationTagId = 0x112;
@@ -208,17 +213,17 @@ namespace recognizer
 
             // Processing: Detection + recognition
             // First inference is expected to be slow (deep learning models mapping to CPU/GPU memory)
-            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            BitmapData imageData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, image.PixelFormat);
             try
             {
                 // For packed formats (RGB-family): https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine7processEK21ULTMRZ_SDK_IMAGE_TYPEPKvK6size_tK6size_tK6size_tKi
                 // For YUV formats (data from camera): https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine7processEK21ULTMRZ_SDK_IMAGE_TYPEPKvPKvPKvK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tKi
                 result = CheckResult("Process", UltMrzSdkEngine.process(
-                        ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_RGB24, // TODO(dmi): not correct. C# image decoder outputs BGR24 instead of RGB24
+                         (bytesPerPixel == 1) ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_Y : (bytesPerPixel == 4 ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_BGRA32 : ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_RGB24), // TODO(dmi): not correct. C# image decoder outputs BGR24 instead of RGB24
                         imageData.Scan0,
-                        (uint)image.Width,
-                        (uint)image.Height,
-                        0, // stride
+                        (uint)imageData.Width,
+                        (uint)imageData.Height,
+                        (uint)(imageData.Stride / bytesPerPixel),
                         orientation
                     ));
                 // Print result to console
