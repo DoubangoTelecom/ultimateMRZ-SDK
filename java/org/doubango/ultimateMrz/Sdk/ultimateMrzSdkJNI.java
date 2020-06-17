@@ -9,11 +9,6 @@
 package org.doubango.ultimateMrz.Sdk;
 
 public class ultimateMrzSdkJNI {
-
-  static {
-    System.loadLibrary("ultimateMRZ_SDK");
-  }
-
   public final static native long new_UltMrzSdkResult__SWIG_0();
   public final static native long new_UltMrzSdkResult__SWIG_1(int jarg1, String jarg2, String jarg3, long jarg4);
   public final static native long new_UltMrzSdkResult__SWIG_2(int jarg1, String jarg2, String jarg3);

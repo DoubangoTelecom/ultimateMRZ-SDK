@@ -193,6 +193,13 @@ namespace recognizer
                 throw new System.IO.FileNotFoundException("File not found:" + file);
             }
             Bitmap image = new Bitmap(file);
+            if (Image.GetPixelFormatSize(image.PixelFormat) == 24 && ((image.Width * 3) & 3) != 0)
+            {
+                //!\\ Not DWORD aligned -> the stride will be multiple of 4-bytes instead of 3-bytes
+                // ultimateMICR requires stride to be in samples unit instead of in bytes
+                Console.Error.WriteLine(String.Format("//!\\ The image width ({0}) not a multiple of DWORD.", image.Width));
+                image = new Bitmap(image, new Size((image.Width + 3) & -4, image.Height));
+            }
             int bytesPerPixel = Image.GetPixelFormatSize(image.PixelFormat) >> 3;
             if (bytesPerPixel != 1 && bytesPerPixel != 3 && bytesPerPixel != 4)
             {
@@ -219,7 +226,7 @@ namespace recognizer
                 // For packed formats (RGB-family): https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine7processEK21ULTMRZ_SDK_IMAGE_TYPEPKvK6size_tK6size_tK6size_tKi
                 // For YUV formats (data from camera): https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine7processEK21ULTMRZ_SDK_IMAGE_TYPEPKvPKvPKvK6size_tK6size_tK6size_tK6size_tK6size_tK6size_tKi
                 result = CheckResult("Process", UltMrzSdkEngine.process(
-                         (bytesPerPixel == 1) ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_Y : (bytesPerPixel == 4 ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_BGRA32 : ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_RGB24), // TODO(dmi): not correct. C# image decoder outputs BGR24 instead of RGB24
+                         (bytesPerPixel == 1) ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_Y : (bytesPerPixel == 4 ? ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_BGRA32 : ULTMRZ_SDK_IMAGE_TYPE.ULTMRZ_SDK_IMAGE_TYPE_BGR24),
                         imageData.Scan0,
                         (uint)imageData.Width,
                         (uint)imageData.Height,

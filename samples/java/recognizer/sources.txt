@@ -1,0 +1,7 @@
+Recognizer.java
+../../../java/org/doubango/ultimateMrz/Sdk/ultimateMrzSdk.java
+../../../java/org/doubango/ultimateMrz/Sdk/ultimateMrzSdkConstants.java
+../../../java/org/doubango/ultimateMrz/Sdk/ultimateMrzSdkJNI.java
+../../../java/org/doubango/ultimateMrz/Sdk/ULTMRZ_SDK_IMAGE_TYPE.java
+../../../java/org/doubango/ultimateMrz/Sdk/UltMrzSdkEngine.java
+../../../java/org/doubango/ultimateMrz/Sdk/UltMrzSdkResult.java

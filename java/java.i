@@ -27,10 +27,4 @@
 %typemap(javadirectorin) void * "$jniinput"
 //==================
 
-%pragma(java) jniclasscode=%{
-  static {
-    System.loadLibrary("ultimateMRZ_SDK");
-  }
-%}
-
 %include ../swig.i

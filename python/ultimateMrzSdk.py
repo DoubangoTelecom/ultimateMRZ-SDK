@@ -80,6 +80,7 @@ ULTMRZ_SDK_IMAGE_TYPE_YVU420P = _ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_YVU420P
 ULTMRZ_SDK_IMAGE_TYPE_YUV422P = _ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_YUV422P
 ULTMRZ_SDK_IMAGE_TYPE_YUV444P = _ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_YUV444P
 ULTMRZ_SDK_IMAGE_TYPE_Y = _ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_Y
+ULTMRZ_SDK_IMAGE_TYPE_BGR24 = _ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_BGR24
 class UltMrzSdkResult(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, UltMrzSdkResult, name, value)

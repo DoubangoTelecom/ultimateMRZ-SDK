@@ -10,6 +10,6 @@ package org.doubango.ultimateMrz.Sdk;
 
 public interface ultimateMrzSdkConstants {
   public final static int ULTMRZ_SDK_VERSION_MAJOR = 2;
-  public final static int ULTMRZ_SDK_VERSION_MINOR = 2;
-  public final static int ULTMRZ_SDK_VERSION_MICRO = 0;
+  public final static int ULTMRZ_SDK_VERSION_MINOR = 3;
+  public final static int ULTMRZ_SDK_VERSION_MICRO = 4;
 }
