@@ -116,7 +116,7 @@ LD_LIBRARY_PATH=../../../binaries/linux/x86_64:$LD_LIBRARY_PATH ./recognizer \
 ```
 On **Windows x86_64**, you may use the next command:
 ```
-recognizer.exe \
+recognizer.exe ^
     --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg ^
     --assets ../../../assets
 ```
