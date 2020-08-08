@@ -3912,7 +3912,16 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_0(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
@@ -3973,7 +3982,16 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_1(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
@@ -4025,7 +4043,16 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_2(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
@@ -4096,17 +4123,44 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_3(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
   {
-    if (PyString_Check(obj2)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj2)) {
+      arg3 = (void *) PyBytes_AsString(obj2);
+    }
+    else if (PyString_Check(obj2)) {
       arg3 = (void *) PyString_AsString(obj2);
     }
   }
   {
-    if (PyString_Check(obj3)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj3)) {
+      arg4 = (void *) PyBytes_AsString(obj3);
+    }
+    else if (PyString_Check(obj3)) {
       arg4 = (void *) PyString_AsString(obj3);
     }
   }
@@ -4198,17 +4252,44 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_4(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
   {
-    if (PyString_Check(obj2)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj2)) {
+      arg3 = (void *) PyBytes_AsString(obj2);
+    }
+    else if (PyString_Check(obj2)) {
       arg3 = (void *) PyString_AsString(obj2);
     }
   }
   {
-    if (PyString_Check(obj3)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj3)) {
+      arg4 = (void *) PyBytes_AsString(obj3);
+    }
+    else if (PyString_Check(obj3)) {
       arg4 = (void *) PyString_AsString(obj3);
     }
   }
@@ -4291,17 +4372,44 @@ SWIGINTERN PyObject *_wrap_UltMrzSdkEngine_process__SWIG_5(PyObject *SWIGUNUSEDP
   } 
   arg1 = static_cast< ultimateMrzSdk::ULTMRZ_SDK_IMAGE_TYPE >(val1);
   {
-    if (PyString_Check(obj1)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj1)) {
+      arg2 = (void *) PyBytes_AsString(obj1);
+    }
+    else if (PyString_Check(obj1)) {
       arg2 = (void *) PyString_AsString(obj1);
     }
   }
   {
-    if (PyString_Check(obj2)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj2)) {
+      arg3 = (void *) PyBytes_AsString(obj2);
+    }
+    else if (PyString_Check(obj2)) {
       arg3 = (void *) PyString_AsString(obj2);
     }
   }
   {
-    if (PyString_Check(obj3)) {
+    // https://docs.python.org/3/c-api/bytes.html#c.PyBytes_AsString
+    // char* PyBytes_AsString(PyObject *o)
+    // Return a pointer to the contents of o. The pointer refers to the internal buffer of o, which consists of len(o) + 1 bytes. 
+    // The last byte in the buffer is always null, regardless of whether there are any other null bytes. 
+    // The data must not be modified in any way, unless the object was just created using PyBytes_FromStringAndSize(NULL, size). 
+    // It must not be deallocated. If o is not a bytes object at all, PyBytes_AsString() returns NULL and raises TypeError.
+    if (PyBytes_Check(obj3)) {
+      arg4 = (void *) PyBytes_AsString(obj3);
+    }
+    else if (PyString_Check(obj3)) {
       arg4 = (void *) PyString_AsString(obj3);
     }
   }
