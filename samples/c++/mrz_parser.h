@@ -46,10 +46,12 @@
 #define MRZ_REGEX_09						"[0-9]"
 #define MRZ_REGEX_AZ						"[A-Z]"
 #define MRZ_REGEX_SEX						"[M|F|X|<]"
+#define MRZ_REGEX_CHECKDIGIT				"[0-9<]"
 #define MRZ_REGEX_ANYCHAR_GROUPMATCH(nn)	"(" MRZ_REGEX_ANYCHAR "{" #nn "})"
 #define MRZ_REGEX_09_GROUPMATCH(nn)			"(" MRZ_REGEX_09 "{" #nn "})"
 #define MRZ_REGEX_AZ_GROUPMATCH(nn)			"(" MRZ_REGEX_AZ "{" #nn "})"
 #define MRZ_REGEX_SEX_GROUPMATCH(nn)		"(" MRZ_REGEX_SEX "{" #nn "})"
+#define MRZ_REGEX_CHECKDIGIT_GROUPMATCH(nn)	"(" MRZ_REGEX_CHECKDIGIT "{" #nn "})"
 
 enum MRZ_DOCUMENT_TYPE {
 	MRZ_DOCUMENT_TYPE_UNKNOWN,
@@ -300,7 +302,7 @@ static bool __mrz_parser_processTD3(const std::vector<std::string>& lines, MrzFi
 		MRZ_REGEX_09_GROUPMATCH(6) /*7: Expiry date*/ \
 		MRZ_REGEX_09_GROUPMATCH(1) /*8: H*/ \
 		MRZ_REGEX_ANYCHAR_GROUPMATCH(14) /*9: Optional data */ \
-		MRZ_REGEX_09_GROUPMATCH(1) /*10: H*/\
+		MRZ_REGEX_CHECKDIGIT_GROUPMATCH(1) /*10: H*/\
 		MRZ_REGEX_09_GROUPMATCH(1) /*11: FH*/
 	);
 
