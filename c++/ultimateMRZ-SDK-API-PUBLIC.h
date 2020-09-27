@@ -15,7 +15,7 @@ ultimateMRZ-SDK public header
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
 #define ULTMRZ_SDK_VERSION_MINOR		5
-#define ULTMRZ_SDK_VERSION_MICRO		0
+#define ULTMRZ_SDK_VERSION_MICRO		1
 
 // Windows's symbols export
 #if defined(SWIG)
