@@ -112,6 +112,17 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
     static final boolean CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED = (System.getProperty("os.arch") == "armv71" || System.getProperty("os.arch") == "aarch64");
 
     /**
+     * Whether to enable backpropagation to detect the MRZ lines.
+     * Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.
+     * JSON name: "backpropagation_enabled"
+     * Default: true for x86 CPUs and false for ARM CPUs.
+     * type: bool
+     * pattern: true | false
+     * Available since: 2.5.2
+     */
+    static final boolean CONFIG_BACKPROPAGATION_ENABLED = false;
+
+    /**
      * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
      * The multi-layer segmenter uses hysteresis for the voting process using a [min, max] double thresholding values. This configuration entry defines how low the
      * thresholding values should be. Lower the values are, higher the number of fragments will be and higher the recall will be. High number of fragments means more
@@ -225,6 +236,7 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
             config.put("num_threads", CONFIG_NUM_THREADS);
             config.put("gpgpu_enabled", CONFIG_GPGPU_ENABLED);
             config.put("gpgpu_workload_balancing_enabled", CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED);
+            config.put("backpropagation_enabled", CONFIG_BACKPROPAGATION_ENABLED);
 
             config.put("segmenter_accuracy", CONFIG_SEGMENTER_ACCURACY);
             config.put("interpolation", CONFIG_INTERPOLATION);

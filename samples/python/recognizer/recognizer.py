@@ -11,12 +11,14 @@
 		recognizer.py \
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
+            [--backprop <whether-to-enable-backpropagation:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
 	Example:
 		recognizer.py \
 			--image C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg \
 			--assets C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets \
+            --backprop True \
 			--tokenfile C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dev/tokens/windows-iMac.lic
 '''
 
@@ -66,6 +68,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--image", required=True, help="Path to the image with MRZ data to recognize")
     parser.add_argument("--assets", required=False, default="../../../assets", help="Path to the assets folder")
+    parser.add_argument("--backprop", required=False, default=True, help="Whether to enable backpropagation to detect the MRZ lines. Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.")
     parser.add_argument("--tokenfile", required=False, default="", help="Path to license token file")
     parser.add_argument("--tokendata", required=False, default="", help="Base64 license token data")
 
@@ -74,6 +77,7 @@ if __name__ == "__main__":
     ASSETS = args.assets
     TOKEN_FILE = args.tokenfile
     TOKEN_DATA = args.tokendata
+    
 
     # Check if image exist
     if not os.path.isfile(IMAGE):
@@ -100,6 +104,9 @@ if __name__ == "__main__":
         JSON_CONFIG["license_token_file"] = TOKEN_FILE
     if TOKEN_DATA:
         JSON_CONFIG["license_token_data"] = TOKEN_DATA
+
+    JSON_CONFIG["backpropagation_enabled"] = (args.backprop == "True")
+
 
     # Initialize the engine
     checkResult("Init", 

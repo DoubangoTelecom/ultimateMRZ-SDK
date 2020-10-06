@@ -11,12 +11,14 @@
 		recognizer \
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
+			[--backprop <whether-to-enable-backpropagation:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
 	Example:
 		recognizer \
 			--image C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg \
 			--assets C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets \
+			--backprop true \
 			--tokenfile C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dev/tokens/windows-iMac.lic
 		
 */
@@ -71,6 +73,12 @@ int main(int argc, char *argv[])
 	UltMrzSdkResult result = UltMrzSdkResult::bodylessOK();
 	std::string assetsFolder, licenseTokenData, licenseTokenFile;
 	std::string pathFileImage;
+	bool backpropEnabled =
+#if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB) || defined(_ARM) || defined(_M_ARM) || defined(_M_ARMT) || defined(__arm) || defined(__aarch64__)
+		false;
+#else
+		true;
+#endif
 
 	// Parsing args
 	std::map<std::string, std::string > args;
@@ -90,6 +98,9 @@ int main(int argc, char *argv[])
 		std::replace(assetsFolder.begin(), assetsFolder.end(), '\\', '/');
 #endif
 	}
+	if (args.find("--backprop") != args.end()) {
+		backpropEnabled = (args["--backprop"] == "true");
+	}
 	if (args.find("--tokenfile") != args.end()) {
 		licenseTokenFile = args["--tokenfile"];
 #if defined(_WIN32)
@@ -105,6 +116,7 @@ int main(int argc, char *argv[])
 	if (!assetsFolder.empty()) {
 		jsonConfig += std::string(",\"assets_folder\": \"") + assetsFolder + std::string("\"");
 	}
+	jsonConfig += std::string(",\"backpropagation_enabled\": ") + (backpropEnabled ? "true" : "false");
 	if (!licenseTokenFile.empty()) {
 		jsonConfig += std::string(",\"license_token_file\": \"") + licenseTokenFile + std::string("\"");
 	}

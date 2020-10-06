@@ -96,6 +96,17 @@ public class Recognizer {
    */
   static final boolean CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED = false;
 
+  /**
+   * Whether to enable backpropagation to detect the MRZ lines.
+   * Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.
+   * JSON name: "backpropagation_enabled"
+   * Default: true for x86 CPUs and false for ARM CPUs.
+   * type: bool
+   * pattern: true | false
+   * Available since: 2.5.2
+   */
+  static final boolean CONFIG_BACKPROPAGATION_ENABLED = true;
+
    /**
    * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
    * The multi-layer segmenter uses hysteresis for the voting process using a [min, max] double thresholding values. This configuration entry defines how low the
@@ -295,6 +306,7 @@ public class Recognizer {
          "\"num_threads\": %d," +
          "\"gpgpu_enabled\": %s," +
          "\"gpgpu_workload_balancing_enabled\": %s," +
+         "\"backpropagation_enabled\": %s," +
          "" +
          "\"segmenter_accuracy\": \"%s\"," +
          "\"gamma\": -1," +
@@ -316,6 +328,7 @@ public class Recognizer {
          CONFIG_NUM_THREADS,
          CONFIG_GPGPU_ENABLED ? "true" : "false",
          CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED ? "true" : "false",
+         CONFIG_BACKPROPAGATION_ENABLED ? "true" : "false",
 
          CONFIG_SEGMENTER_ACCURACY,
          CONFIG_INTERPOLATION,

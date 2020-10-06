@@ -101,6 +101,16 @@ namespace recognizer
          */
           const bool CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED = false;
 
+        /**
+         * Whether to enable backpropagation to detect the MRZ lines.
+         * Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.
+         * JSON name: "backpropagation_enabled"
+         * Default: true for x86 CPUs and false for ARM CPUs.
+         * type: bool
+         * pattern: true | false
+         * Available since: 2.5.2
+         */
+        const bool CONFIG_BACKPROPAGATION_ENABLED = true;
 
         /**
          * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
@@ -299,6 +309,7 @@ namespace recognizer
                 num_threads = CONFIG_NUM_THREADS,
                 gpgpu_enabled = CONFIG_GPGPU_ENABLED,
                 gpgpu_workload_balancing_enabled = CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED,
+                backpropagation_enabled = CONFIG_BACKPROPAGATION_ENABLED,
 
                 segmenter_accuracy = CONFIG_SEGMENTER_ACCURACY,
                 interpolation = CONFIG_INTERPOLATION,
