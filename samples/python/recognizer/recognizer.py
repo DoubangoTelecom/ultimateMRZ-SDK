@@ -12,6 +12,7 @@
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
             [--backprop <whether-to-enable-backpropagation:true/false>] \
+            [--ielcd <whether-to-enable-IELCD:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
 	Example:
@@ -26,11 +27,12 @@ import ultimateMrzSdk
 import sys
 import argparse
 import json
+import platform
 import os.path
-try:
-    import Image
-except ImportError:
-    from PIL import Image
+from PIL import Image, ExifTags
+
+# EXIF orientation TAG
+ORIENTATION_TAG = [orient for orient in ExifTags.TAGS.keys() if ExifTags.TAGS[orient] == 'Orientation']
 
 # Defines the default JSON configuration. More information at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
 JSON_CONFIG = {
@@ -69,6 +71,7 @@ if __name__ == "__main__":
     parser.add_argument("--image", required=True, help="Path to the image with MRZ data to recognize")
     parser.add_argument("--assets", required=False, default="../../../assets", help="Path to the assets folder")
     parser.add_argument("--backprop", required=False, default=True, help="Whether to enable backpropagation to detect the MRZ lines. Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.")
+    parser.add_argument("--ielcd", required=False, default=platform.processor()=='i386', help="Whether to enable Image Enhancement for Low Contrast Document (IELCD). More information at https://www.doubango.org/SDKs/mrz/docs/IELCD.html. Default: true for x86 CPUs and false for ARM CPUs.")    
     parser.add_argument("--tokenfile", required=False, default="", help="Path to license token file")
     parser.add_argument("--tokendata", required=False, default="", help="Base64 license token data")
 
@@ -97,6 +100,10 @@ if __name__ == "__main__":
         print(TAG + "Invalid mode: %s" % image.mode)
         assert False
 
+    # Read the EXIF orientation value
+    exif = image._getexif()
+    exifOrientation = exif[ORIENTATION_TAG[0]] if len(ORIENTATION_TAG) == 1 and exif != None else 1
+
     # Update JSON options using values from the command args
     if ASSETS:
         JSON_CONFIG["assets_folder"] = ASSETS
@@ -106,6 +113,7 @@ if __name__ == "__main__":
         JSON_CONFIG["license_token_data"] = TOKEN_DATA
 
     JSON_CONFIG["backpropagation_enabled"] = (args.backprop == "True")
+    JSON_CONFIG["ielcd"] = (args.ielcd == "True")
 
 
     # Initialize the engine
@@ -122,7 +130,9 @@ if __name__ == "__main__":
                     format,
                     image.tobytes(), # type(x) == bytes
                     width,
-                    height
+                    height,
+                    0, # stride
+                    exifOrientation
                     )
         )
 
