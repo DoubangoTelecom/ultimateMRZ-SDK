@@ -12,6 +12,7 @@
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
 			[--backprop <whether-to-enable-backpropagation:true/false>] \
+			[--ielcd <whether-to-enable-IELCD:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
 	Example:
@@ -73,11 +74,12 @@ int main(int argc, char *argv[])
 	UltMrzSdkResult result = UltMrzSdkResult::bodylessOK();
 	std::string assetsFolder, licenseTokenData, licenseTokenFile;
 	std::string pathFileImage;
-	bool backpropEnabled =
 #if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB) || defined(_ARM) || defined(_M_ARM) || defined(_M_ARMT) || defined(__arm) || defined(__aarch64__)
-		false;
+	bool backpropEnabled = false;
+	bool ielcdEnabled = false;
 #else
-		true;
+	bool backpropEnabled = true;
+	bool ielcdEnabled = true;
 #endif
 
 	// Parsing args
@@ -101,6 +103,9 @@ int main(int argc, char *argv[])
 	if (args.find("--backprop") != args.end()) {
 		backpropEnabled = (args["--backprop"] == "true");
 	}
+	if (args.find("--ielcd") != args.end()) {
+		ielcdEnabled = (args["--ielcd"] == "true");
+	}
 	if (args.find("--tokenfile") != args.end()) {
 		licenseTokenFile = args["--tokenfile"];
 #if defined(_WIN32)
@@ -117,6 +122,7 @@ int main(int argc, char *argv[])
 		jsonConfig += std::string(",\"assets_folder\": \"") + assetsFolder + std::string("\"");
 	}
 	jsonConfig += std::string(",\"backpropagation_enabled\": ") + (backpropEnabled ? "true" : "false");
+	jsonConfig += std::string(",\"ielcd_enabled\": ") + (ielcdEnabled ? "true" : "false");
 	if (!licenseTokenFile.empty()) {
 		jsonConfig += std::string(",\"license_token_file\": \"") + licenseTokenFile + std::string("\"");
 	}
@@ -198,6 +204,8 @@ static void printUsage(const std::string& message /*= ""*/)
 		"recognizer\n"
 		"\t--image <path-to-image-with-mrzdata-to-recognize> \n"
 		"\t[--assets <path-to-assets-folder>] \n"
+		"\t[--backprop <whether-to-enable-backpropagation:true/false>] \n"
+		"\t[--ielcd <whether-to-enable-IELCD:true/false>] \n"
 		"\t[--tokenfile <path-to-license-token-file>] \n"
 		"\t[--tokendata <base64-license-token-data>] \n"
 		"\n"
@@ -205,6 +213,8 @@ static void printUsage(const std::string& message /*= ""*/)
 		"\n"
 		"--image: Path to the image(JPEG/PNG/BMP) to process. You can use default image at ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg.\n"
 		"--assets: Path to the assets folder containing the configuration files and models. Default value is the current folder.\n"
+		"--backprop: Whether to enable backpropagation to detect the MICR lines. Only CMC-7 font uses this option. More information at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation. Default: true for x86 CPUs and false for ARM CPUs.\n\n"
+		"--ielcd: Whether to enable Image Enhancement for Low Contrast Document (IELCD). More information at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd. Default: true for x86 CPUs and false for ARM CPUs.\n\n"
 		"--tokenfile: Path to the file containing the base64 license token if you have one. If not provided then, the application will act like a trial version. Default: null.\n"
 		"--tokendata: Base64 license token if you have one. If not provided then, the application will act like a trial version. Default: null.\n"
 		"********************************************************************************\n"

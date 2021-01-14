@@ -59,6 +59,8 @@ static const char* __jsonConfig =
 ""
 "\"segmenter_accuracy\": \"high\","
 "\"interpolation\": \"bilinear\","
+"\"backpropagation_enabled\": false,"
+"\"ielcd_enabled\": false,"
 "\"min_num_lines\": 2,"
 "\"roi\": [0, 0, 0, 0],"
 "\"min_score\": 0.0"

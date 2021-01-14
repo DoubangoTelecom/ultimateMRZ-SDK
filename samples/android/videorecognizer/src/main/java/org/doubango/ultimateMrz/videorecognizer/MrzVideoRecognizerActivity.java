@@ -120,7 +120,19 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
      * pattern: true | false
      * Available since: 2.5.2
      */
-    static final boolean CONFIG_BACKPROPAGATION_ENABLED = false;
+    static final boolean CONFIG_BACKPROPAGATION_ENABLED = System.getProperty("os.arch").equals("amd64");
+
+    /**
+     * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
+     * Technical description at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd.
+     * JSON name: "ielcd_enabled"
+     * Default: true for x86 CPUs and false for ARM CPUs.
+     * type: bool
+     * pattern: true | false
+     * Available since: 2.6.0
+     * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#ielcd-enabled
+     */
+    static final boolean CONFIG_IELCD_ENABLED = System.getProperty("os.arch").equals("amd64");
 
     /**
      * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
@@ -237,6 +249,7 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
             config.put("gpgpu_enabled", CONFIG_GPGPU_ENABLED);
             config.put("gpgpu_workload_balancing_enabled", CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED);
             config.put("backpropagation_enabled", CONFIG_BACKPROPAGATION_ENABLED);
+            config.put("ielcd_enabled", CONFIG_IELCD_ENABLED);
 
             config.put("segmenter_accuracy", CONFIG_SEGMENTER_ACCURACY);
             config.put("interpolation", CONFIG_INTERPOLATION);

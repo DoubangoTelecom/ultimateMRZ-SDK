@@ -113,6 +113,18 @@ namespace recognizer
         const bool CONFIG_BACKPROPAGATION_ENABLED = true;
 
         /**
+         * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
+         * Technical description at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd.
+         * JSON name: "ielcd_enabled"
+         * Default: true for x86 CPUs and false for ARM CPUs.
+         * type: bool
+         * pattern: true | false
+         * Available since: 2.6.0
+         * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#ielcd-enabled
+         */
+        const bool CONFIG_IELCD_ENABLED = true;
+
+        /**
          * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
          * The multi-layer segmenter uses hysteresis for the voting process using a [min, max] double thresholding values. This configuration entry defines how low the
          * thresholding values should be. Lower the values are, higher the number of fragments will be and higher the recall will be. High number of fragments means more
@@ -310,6 +322,7 @@ namespace recognizer
                 gpgpu_enabled = CONFIG_GPGPU_ENABLED,
                 gpgpu_workload_balancing_enabled = CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED,
                 backpropagation_enabled = CONFIG_BACKPROPAGATION_ENABLED,
+                ielcd_enabled = CONFIG_IELCD_ENABLED,
 
                 segmenter_accuracy = CONFIG_SEGMENTER_ACCURACY,
                 interpolation = CONFIG_INTERPOLATION,

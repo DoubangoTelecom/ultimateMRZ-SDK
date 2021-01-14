@@ -105,7 +105,19 @@ public class Recognizer {
    * pattern: true | false
    * Available since: 2.5.2
    */
-  static final boolean CONFIG_BACKPROPAGATION_ENABLED = true;
+  static final boolean CONFIG_BACKPROPAGATION_ENABLED = System.getProperty("os.arch").equals("amd64");
+
+   /**
+   * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
+   * Technical description at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd.
+   * JSON name: "ielcd_enabled"
+   * Default: true for x86 CPUs and false for ARM CPUs.
+   * type: bool
+   * pattern: true | false
+   * Available since: 2.6.0
+   * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#ielcd-enabled
+   */
+  static final boolean CONFIG_IELCD_ENABLED = System.getProperty("os.arch").equals("amd64");
 
    /**
    * Before calling the classifier to determine whether a zone contains a MRZ line we need to segment the text using multi-layer segmenter followed by clustering.
@@ -307,6 +319,7 @@ public class Recognizer {
          "\"gpgpu_enabled\": %s," +
          "\"gpgpu_workload_balancing_enabled\": %s," +
          "\"backpropagation_enabled\": %s," +
+         "\"ielcd_enabled\": %s," +
          "" +
          "\"segmenter_accuracy\": \"%s\"," +
          "\"gamma\": -1," +
@@ -329,6 +342,7 @@ public class Recognizer {
          CONFIG_GPGPU_ENABLED ? "true" : "false",
          CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED ? "true" : "false",
          CONFIG_BACKPROPAGATION_ENABLED ? "true" : "false",
+         CONFIG_IELCD_ENABLED ? "true" : "false",
 
          CONFIG_SEGMENTER_ACCURACY,
          CONFIG_INTERPOLATION,

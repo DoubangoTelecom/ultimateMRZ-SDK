@@ -25,6 +25,7 @@ recognizer.py \
       --image <path-to-image-with-mrzdata-to-process> \
       [--assets <path-to-assets-folder>] \
       [--backprop <whether-to-enable-backpropagation:true/false>] \
+      [--ielcd <whether-to-enable-IELCD:true/false>] \
       [--tokenfile <path-to-license-token-file>] \
       [--tokendata <base64-license-token-data>]
 ```
@@ -32,6 +33,7 @@ Options surrounded with **[]** are optional.
 - `--image` Path to the image(JPEG/PNG/BMP) to process. You can use default image at [../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg](../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg).
 - `--assets` Path to the [assets](../../../assets) folder containing the configuration files and models. Default value is the current folder.
 - `--backprop` Whether to enable backpropagation to detect the MRZ lines. More information at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation. Default: `true` for x86 CPUs and `false` for ARM CPUs.
+- `--ielcd` Whether to enable Image Enhancement for Low Contrast Document (IELCD). More information at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd. Default: `true` for x86 CPUs and `false` for ARM CPUs.
 - `--tokenfile` Path to the file containing the base64 license token if you have one. If not provided then, the application will act like a trial version. Default: *null*.
 - `--tokendata` Base64 license token if you have one. If not provided then, the application will act like a trial version. Default: *null*.
 
@@ -47,19 +49,19 @@ cd ultimateMRZ-SDK/samples/python/recognizer
 ```
 PYTHONPATH=../../../binaries/raspbian/armv7l:../../../python \
 LD_LIBRARY_PATH=../../../binaries/raspbian/armv7l:$LD_LIBRARY_PATH \
-python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop false
+python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop false --ielcd false
 ```
 - On **Linux x86_64**, you may use the next command:
 ```
 PYTHONPATH=../../../binaries/linux/x86_64:../../../python \
 LD_LIBRARY_PATH=../../../binaries/linux/x86_64:$LD_LIBRARY_PATH \
-python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop true
+python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop true --ielcd true
 ```
 - On **Windows x86_64**, you may use the next command:
 ```
 setlocal
 set PYTHONPATH=../../../binaries/windows/x86_64;../../../python
-python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop true
+python recognizer.py --image ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg --assets ../../../assets --backprop true --ielcd true
 endlocal
 ```
 
