@@ -105,12 +105,23 @@ namespace recognizer
          * Whether to enable backpropagation to detect the MRZ lines.
          * Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.
          * JSON name: "backpropagation_enabled"
-         * Default: true for x86 CPUs and false for ARM CPUs.
+         * Default: true.
          * type: bool
          * pattern: true | false
          * Available since: 2.5.2
          */
         const bool CONFIG_BACKPROPAGATION_ENABLED = true;
+
+        /**
+         * Whether to enable vertical check to detect +/-90deg rotated images. We recommend not enabling this features as it adds significant latency.
+         * Technical description at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#vertical-check-enabled.
+         * JSON name: "vertical_check_enabled"
+         * Default: true.
+         * type: bool
+         * pattern: true | false
+         * Available since: 2.8.1
+         */
+        const bool CONFIG_VCHECK_ENABLED = true;
 
         /**
          * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
@@ -322,6 +333,7 @@ namespace recognizer
                 gpgpu_enabled = CONFIG_GPGPU_ENABLED,
                 gpgpu_workload_balancing_enabled = CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED,
                 backpropagation_enabled = CONFIG_BACKPROPAGATION_ENABLED,
+                vertical_check_enabled = CONFIG_VCHECK_ENABLED,
                 ielcd_enabled = CONFIG_IELCD_ENABLED,
 
                 segmenter_accuracy = CONFIG_SEGMENTER_ACCURACY,

@@ -12,6 +12,7 @@
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
             [--backprop <whether-to-enable-backpropagation:true/false>] \
+			[--vcheck <whether-to-enable-vertical-check:true/false>] \
             [--ielcd <whether-to-enable-IELCD:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
@@ -20,6 +21,7 @@
 			--image C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg \
 			--assets C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets \
             --backprop True \
+			--vcheck True \
 			--tokenfile C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dev/tokens/windows-iMac.lic
 '''
 
@@ -70,7 +72,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--image", required=True, help="Path to the image with MRZ data to recognize")
     parser.add_argument("--assets", required=False, default="../../../assets", help="Path to the assets folder")
-    parser.add_argument("--backprop", required=False, default=True, help="Whether to enable backpropagation to detect the MRZ lines. Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation.")
+    parser.add_argument("--backprop", required=False, default=platform.processor()=='i386', help="Whether to enable backpropagation to detect the MRZ lines. Technical description at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation. Default: true for x86 CPUs and false for ARM CPUs.")
+    parser.add_argument("--vcheck", required=False, default=platform.processor()=='i386', help="Whether to enable vertical check to detect +/-90deg rotated images. Default: true for x86 CPUs and false for ARM CPUs.")
     parser.add_argument("--ielcd", required=False, default=platform.processor()=='i386', help="Whether to enable Image Enhancement for Low Contrast Document (IELCD). More information at https://www.doubango.org/SDKs/mrz/docs/IELCD.html. Default: true for x86 CPUs and false for ARM CPUs.")    
     parser.add_argument("--tokenfile", required=False, default="", help="Path to license token file")
     parser.add_argument("--tokendata", required=False, default="", help="Base64 license token data")
@@ -113,6 +116,7 @@ if __name__ == "__main__":
         JSON_CONFIG["license_token_data"] = TOKEN_DATA
 
     JSON_CONFIG["backpropagation_enabled"] = (args.backprop == "True")
+    JSON_CONFIG["vertical_check_enabled"] = (args.vcheck == "True")
     JSON_CONFIG["ielcd"] = (args.ielcd == "True")
 
 

@@ -1,4 +1,4 @@
-/* Copyright (C) 2011-2020 Doubango Telecom <https://www.doubango.org>
+/* Copyright (C) 2011-2021 Doubango Telecom <https://www.doubango.org>
 * File author: Mamadou DIOP (Doubango Telecom, France).
 * License: For non commercial use only.
 * Source code: https://github.com/DoubangoTelecom/ultimateMRZ-SDK
@@ -12,6 +12,7 @@
 			--image <path-to-image-with-mrzdata-to-recognize> \
 			[--assets <path-to-assets-folder>] \
 			[--backprop <whether-to-enable-backpropagation:true/false>] \
+			[--vcheck <whether-to-enable-vertical-check:true/false>] \
 			[--ielcd <whether-to-enable-IELCD:true/false>] \
 			[--tokenfile <path-to-license-token-file>] \
 			[--tokendata <base64-license-token-data>]
@@ -20,6 +21,7 @@
 			--image C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg \
 			--assets C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dist/assets \
 			--backprop true \
+			--vcheck true \
 			--tokenfile C:/Projects/GitHub/ultimate/ultimateMRZ/SDK_dev/tokens/windows-iMac.lic
 		
 */
@@ -77,9 +79,11 @@ int main(int argc, char *argv[])
 #if defined(__arm__) || defined(__thumb__) || defined(__TARGET_ARCH_ARM) || defined(__TARGET_ARCH_THUMB) || defined(_ARM) || defined(_M_ARM) || defined(_M_ARMT) || defined(__arm) || defined(__aarch64__)
 	bool backpropEnabled = false;
 	bool ielcdEnabled = false;
+	bool vcheckEnabled = false;
 #else
 	bool backpropEnabled = true;
 	bool ielcdEnabled = true;
+	bool vcheckEnabled = true;
 #endif
 
 	// Parsing args
@@ -103,6 +107,9 @@ int main(int argc, char *argv[])
 	if (args.find("--backprop") != args.end()) {
 		backpropEnabled = (args["--backprop"] == "true");
 	}
+	if (args.find("--vcheck") != args.end()) {
+		vcheckEnabled = (args["--vcheck"] == "true");
+	}
 	if (args.find("--ielcd") != args.end()) {
 		ielcdEnabled = (args["--ielcd"] == "true");
 	}
@@ -122,6 +129,7 @@ int main(int argc, char *argv[])
 		jsonConfig += std::string(",\"assets_folder\": \"") + assetsFolder + std::string("\"");
 	}
 	jsonConfig += std::string(",\"backpropagation_enabled\": ") + (backpropEnabled ? "true" : "false");
+	jsonConfig += std::string(",\"vertical_check_enabled\": ") + (vcheckEnabled ? "true" : "false");
 	jsonConfig += std::string(",\"ielcd_enabled\": ") + (ielcdEnabled ? "true" : "false");
 	if (!licenseTokenFile.empty()) {
 		jsonConfig += std::string(",\"license_token_file\": \"") + licenseTokenFile + std::string("\"");
@@ -214,6 +222,7 @@ static void printUsage(const std::string& message /*= ""*/)
 		"--image: Path to the image(JPEG/PNG/BMP) to process. You can use default image at ../../../assets/images/Czech_passport_2005_MRZ_orient1_1300x1002.jpg.\n"
 		"--assets: Path to the assets folder containing the configuration files and models. Default value is the current folder.\n"
 		"--backprop: Whether to enable backpropagation to detect the MICR lines. Only CMC-7 font uses this option. More information at https://www.doubango.org/SDKs/mrz/docs/Detection_techniques.html#backpropagation. Default: true for x86 CPUs and false for ARM CPUs.\n\n"
+		"--vcheck: Whether to enable vertical check to detect +/-90deg rotated images. Default: true for x86 CPUs and false for ARM CPUs.\n\n"
 		"--ielcd: Whether to enable Image Enhancement for Low Contrast Document (IELCD). More information at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd. Default: true for x86 CPUs and false for ARM CPUs.\n\n"
 		"--tokenfile: Path to the file containing the base64 license token if you have one. If not provided then, the application will act like a trial version. Default: null.\n"
 		"--tokendata: Base64 license token if you have one. If not provided then, the application will act like a trial version. Default: null.\n"

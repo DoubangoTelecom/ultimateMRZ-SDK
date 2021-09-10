@@ -123,6 +123,17 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
     static final boolean CONFIG_BACKPROPAGATION_ENABLED = System.getProperty("os.arch").equals("amd64");
 
     /**
+     * Whether to enable vertical check to detect +/-90deg rotated images. We recommend not enabling this features as it adds significant latency.
+     * Technical description at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#vertical-check-enabled.
+     * JSON name: "vertical_check_enabled"
+     * Default: true for x86 CPUs and false for ARM CPUs.
+     * type: bool
+     * pattern: true | false
+     * Available since: 2.8.1
+     */
+    static final boolean CONFIG_VCHECK_ENABLED = System.getProperty("os.arch").equals("amd64");;
+
+    /**
      * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
      * Technical description at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd.
      * JSON name: "ielcd_enabled"
@@ -249,6 +260,7 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
             config.put("gpgpu_enabled", CONFIG_GPGPU_ENABLED);
             config.put("gpgpu_workload_balancing_enabled", CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED);
             config.put("backpropagation_enabled", CONFIG_BACKPROPAGATION_ENABLED);
+            config.put("vertical_check_enabled", CONFIG_VCHECK_ENABLED);
             config.put("ielcd_enabled", CONFIG_IELCD_ENABLED);
 
             config.put("segmenter_accuracy", CONFIG_SEGMENTER_ACCURACY);

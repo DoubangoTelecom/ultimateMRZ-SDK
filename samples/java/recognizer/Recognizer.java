@@ -107,6 +107,17 @@ public class Recognizer {
    */
   static final boolean CONFIG_BACKPROPAGATION_ENABLED = System.getProperty("os.arch").equals("amd64");
 
+  /**
+    * Whether to enable vertical check to detect +/-90deg rotated images. We recommend not enabling this features as it adds significant latency.
+    * Technical description at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#vertical-check-enabled.
+    * JSON name: "vertical_check_enabled"
+    * Default: true for x86 CPUs and false for ARM CPUs.
+    * type: bool
+    * pattern: true | false
+    * Available since: 2.8.1
+    */
+  static final boolean CONFIG_VCHECK_ENABLED = System.getProperty("os.arch").equals("amd64");
+
    /**
    * Whether to enable Image Enhancement for Low Contrast Document (IELCD).
    * Technical description at https://www.doubango.org/SDKs/mrz/docs/IELCD.html#ielcd.
@@ -319,6 +330,7 @@ public class Recognizer {
          "\"gpgpu_enabled\": %s," +
          "\"gpgpu_workload_balancing_enabled\": %s," +
          "\"backpropagation_enabled\": %s," +
+		 "\"vertical_check_enabled\": %s," +
          "\"ielcd_enabled\": %s," +
          "" +
          "\"segmenter_accuracy\": \"%s\"," +
@@ -342,6 +354,7 @@ public class Recognizer {
          CONFIG_GPGPU_ENABLED ? "true" : "false",
          CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED ? "true" : "false",
          CONFIG_BACKPROPAGATION_ENABLED ? "true" : "false",
+		 CONFIG_VCHECK_ENABLED ? "true" : "false",
          CONFIG_IELCD_ENABLED ? "true" : "false",
 
          CONFIG_SEGMENTER_ACCURACY,
