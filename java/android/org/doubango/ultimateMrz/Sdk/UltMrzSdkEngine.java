@@ -71,6 +71,10 @@ public class UltMrzSdkEngine {
     return new UltMrzSdkResult(ultimateMrzSdkJNI.UltMrzSdkEngine_process__SWIG_5(imageType.swigValue(), yPtr, uPtr, vPtr, widthInSamples, heightInSamples, yStrideInBytes, uStrideInBytes, vStrideInBytes), true);
   }
 
+  public static int exifOrientation(java.nio.ByteBuffer jpegMetaDataPtr, long jpegMetaDataSize) {
+    return ultimateMrzSdkJNI.UltMrzSdkEngine_exifOrientation(jpegMetaDataPtr, jpegMetaDataSize);
+  }
+
   public static UltMrzSdkResult requestRuntimeLicenseKey(boolean rawInsteadOfJSON) {
     return new UltMrzSdkResult(ultimateMrzSdkJNI.UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0(rawInsteadOfJSON), true);
   }

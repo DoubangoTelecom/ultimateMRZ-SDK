@@ -6,15 +6,20 @@
 */
 
 import java.io.File;
-import java.lang.IllegalArgumentException;
-import java.nio.ByteBuffer;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.lang.IllegalArgumentException;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.MappedByteBuffer;
+import java.nio.charset.Charset;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
@@ -246,9 +251,6 @@ public class Recognizer {
       final byte[] pixelData = ((DataBufferByte) dataBuffer).getData();
       nativeBuffer.put(pixelData);
       nativeBuffer.rewind();
-
-      // TODO(dmi): add code to extract EXIF orientation
-      final int orientation = 1;
       
       // Processing
       // For packed formats (RGB-family): https://www.doubango.org/SDKs/mrz/docs/cpp-api.html#_CPPv4N14ultimateMrzSdk15UltMrzSdkEngine7processEK21ULTMRZ_SDK_IMAGE_TYPEPKvK6size_tK6size_tK6size_tKi
@@ -259,7 +261,7 @@ public class Recognizer {
             image.getWidth(),
             image.getHeight(),
             image.getWidth(), // stride
-            orientation
+            getExifOrientation(file)
          ));
       // Print result to console
       System.out.println("Result: " + result.json() + System.lineSeparator());
@@ -275,6 +277,29 @@ public class Recognizer {
        // Now that you're done, deInit the engine before exiting
        CheckResult("DeInit", UltMrzSdkEngine.deInit());
    }
+   
+   static int getExifOrientation(File file) throws IOException 
+   {
+      FileInputStream fin= new FileInputStream(file);
+      FileChannel channel = fin.getChannel();
+
+      // Check if it's JPEG
+      final MappedByteBuffer codeBuffer = channel.map(FileChannel.MapMode.READ_ONLY, 0, 2); // read 2 first bytes
+      if (codeBuffer.asShortBuffer().get() != -40) { // -40 = 0xFFD8 in Short
+         return 1;
+      }
+      
+      // Read raw data and extract EXIF info
+      final long fileSize = channel.size();
+      final ByteBuffer buffer = ByteBuffer.allocateDirect((int) fileSize);
+      channel.read(buffer);
+      buffer.flip();
+
+      channel.close();
+      fin.close();
+
+      return UltMrzSdkEngine.exifOrientation(buffer, buffer.remaining());
+    }
 
    static Hashtable<String, String> ParseArgs(String[] args) throws IllegalArgumentException
    {

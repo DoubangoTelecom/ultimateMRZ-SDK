@@ -255,6 +255,9 @@ class ultimateMrzSdkPINVOKE {
   [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_process__SWIG_5")]
   public static extern IntPtr UltMrzSdkEngine_process__SWIG_5(int jarg1, IntPtr jarg2, IntPtr jarg3, IntPtr jarg4, uint jarg5, uint jarg6, uint jarg7, uint jarg8, uint jarg9);
 
+  [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_exifOrientation")]
+  public static extern int UltMrzSdkEngine_exifOrientation(IntPtr jarg1, uint jarg2);
+
   [DllImport("ultimateMRZ-SDK", EntryPoint="CSharp_UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0")]
   public static extern IntPtr UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0(bool jarg1);
 

@@ -28,6 +28,7 @@ public class ultimateMrzSdkJNI {
   public final static native long UltMrzSdkEngine_process__SWIG_3(int jarg1, java.nio.ByteBuffer jarg2, java.nio.ByteBuffer jarg3, java.nio.ByteBuffer jarg4, long jarg5, long jarg6, long jarg7, long jarg8, long jarg9, long jarg10, int jarg11);
   public final static native long UltMrzSdkEngine_process__SWIG_4(int jarg1, java.nio.ByteBuffer jarg2, java.nio.ByteBuffer jarg3, java.nio.ByteBuffer jarg4, long jarg5, long jarg6, long jarg7, long jarg8, long jarg9, long jarg10);
   public final static native long UltMrzSdkEngine_process__SWIG_5(int jarg1, java.nio.ByteBuffer jarg2, java.nio.ByteBuffer jarg3, java.nio.ByteBuffer jarg4, long jarg5, long jarg6, long jarg7, long jarg8, long jarg9);
+  public final static native int UltMrzSdkEngine_exifOrientation(java.nio.ByteBuffer jarg1, long jarg2);
   public final static native long UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0(boolean jarg1);
   public final static native long UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_1();
   public final static native void delete_UltMrzSdkEngine(long jarg1);

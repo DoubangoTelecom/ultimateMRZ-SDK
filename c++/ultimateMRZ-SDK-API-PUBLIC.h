@@ -14,8 +14,8 @@ ultimateMRZ-SDK public header
 #include <string>
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
-#define ULTMRZ_SDK_VERSION_MINOR		8
-#define ULTMRZ_SDK_VERSION_MICRO		1
+#define ULTMRZ_SDK_VERSION_MINOR		9
+#define ULTMRZ_SDK_VERSION_MICRO		0
 
 // Windows's symbols export
 #if defined(SWIG)
@@ -223,6 +223,7 @@ namespace ultimateMrzSdk
 			\param imageHeightInSamples Image height in samples.
 			\param imageStrideInSamples Image stride in samples. Should be zero unless your the data is strided.
 			\param imageExifOrientation Image EXIF/JPEG orientation. Must be within [1, 8]. More information at https://www.impulseadventure.com/photo/exif-orientation.html
+			\returns a \ref UltMrzSdkResult "result"
 		*/
 		static UltMrzSdkResult process(
 			const ULTMRZ_SDK_IMAGE_TYPE imageType, 
@@ -245,6 +246,7 @@ namespace ultimateMrzSdk
 			\param vStrideInBytes Stride in bytes for the V (chroma) samples.
 			\param uvPixelStrideInBytes Pixel stride in bytes for the UV (chroma) samples. Should be 1 for planar and 2 for semi-planar formats. Set to 0 for auto-detect.
 			\param exifOrientation Image EXIF/JPEG orientation. Must be within [1, 8]. More information at https://www.impulseadventure.com/photo/exif-orientation.html
+			\returns a \ref UltMrzSdkResult "result"
 		*/
 		static UltMrzSdkResult process(
 			const ULTMRZ_SDK_IMAGE_TYPE imageType,
@@ -260,13 +262,22 @@ namespace ultimateMrzSdk
 			const int exifOrientation = 1
 		);
 
+		/*! Retrieve EXIF orientation value from JPEG meta-data.
+			\param jpegMetaDataPtr Pointer to the meta-data.
+			\param jpegMetaDataSize Size of the meta-data.
+			\returns Image's EXIF/JPEG orientation. Must be within [1, 8]. More information at https://www.impulseadventure.com/photo/exif-orientation.html.
+
+			Available since: 2.9.0
+		*/
+		static int exifOrientation(const void* jpegMetaDataPtr, const size_t jpegMetaDataSize);
+
 		/*! Build a unique runtime license key associated to this device.
-		You must \ref init "initialize" the engine before calling this function.
-		This function doesn't require internet connection.
-		The runtime key must be activated to obtain a token. The activation procedure is explained at https://www.doubango.org/SDKs/LicenseManager/docs/Activation_use_cases.html.
-		\param rawInsteadOfJSON Whether to output the runtime key as raw string intead of JSON entry. Requesting raw
-		string instead of JSON could be helpful for applications without JSON parser to extract the key.
-		\returns a \ref UltAlprSdkResult "result"
+			You must \ref init "initialize" the engine before calling this function.
+			This function doesn't require internet connection.
+			The runtime key must be activated to obtain a token. The activation procedure is explained at https://www.doubango.org/SDKs/LicenseManager/docs/Activation_use_cases.html.
+			\param rawInsteadOfJSON Whether to output the runtime key as raw string intead of JSON entry. Requesting raw
+			string instead of JSON could be helpful for applications without JSON parser to extract the key.
+			\returns a \ref UltAlprSdkResult "result"
 		*/
 		static UltMrzSdkResult requestRuntimeLicenseKey(const bool& rawInsteadOfJSON = false);
 

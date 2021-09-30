@@ -114,6 +114,8 @@ class UltMrzSdkEngine(_object):
     if _newclass:deInit = staticmethod(_ultimateMrzSdk.UltMrzSdkEngine_deInit)
     __swig_getmethods__["process"] = lambda x: _ultimateMrzSdk.UltMrzSdkEngine_process
     if _newclass:process = staticmethod(_ultimateMrzSdk.UltMrzSdkEngine_process)
+    __swig_getmethods__["exifOrientation"] = lambda x: _ultimateMrzSdk.UltMrzSdkEngine_exifOrientation
+    if _newclass:exifOrientation = staticmethod(_ultimateMrzSdk.UltMrzSdkEngine_exifOrientation)
     __swig_getmethods__["requestRuntimeLicenseKey"] = lambda x: _ultimateMrzSdk.UltMrzSdkEngine_requestRuntimeLicenseKey
     if _newclass:requestRuntimeLicenseKey = staticmethod(_ultimateMrzSdk.UltMrzSdkEngine_requestRuntimeLicenseKey)
     __swig_destroy__ = _ultimateMrzSdk.delete_UltMrzSdkEngine
@@ -132,6 +134,10 @@ UltMrzSdkEngine_deInit = _ultimateMrzSdk.UltMrzSdkEngine_deInit
 def UltMrzSdkEngine_process(*args):
   return _ultimateMrzSdk.UltMrzSdkEngine_process(*args)
 UltMrzSdkEngine_process = _ultimateMrzSdk.UltMrzSdkEngine_process
+
+def UltMrzSdkEngine_exifOrientation(*args):
+  return _ultimateMrzSdk.UltMrzSdkEngine_exifOrientation(*args)
+UltMrzSdkEngine_exifOrientation = _ultimateMrzSdk.UltMrzSdkEngine_exifOrientation
 
 def UltMrzSdkEngine_requestRuntimeLicenseKey(rawInsteadOfJSON=False):
   return _ultimateMrzSdk.UltMrzSdkEngine_requestRuntimeLicenseKey(rawInsteadOfJSON)

@@ -40,8 +40,25 @@
 
 using namespace ultimateMrzSdk;
 
+struct MrzFile {
+	int width = 0, height = 0, channels = 0;
+	stbi_uc* uncompressedDataPtr = nullptr;
+	void* compressedDataPtr = nullptr;
+	size_t compressedDataSize = 0;
+	FILE* filePtr = nullptr;
+	virtual ~MrzFile() {
+		if (uncompressedDataPtr) free(uncompressedDataPtr), uncompressedDataPtr = nullptr;
+		if (compressedDataPtr) free(compressedDataPtr), compressedDataPtr = nullptr;
+		if (filePtr) fclose(filePtr), filePtr = nullptr;
+	}
+	bool isValid() const {
+		return width > 0 && height > 0 && (channels == 1 || channels == 3 || channels == 4) && uncompressedDataPtr && compressedDataPtr && compressedDataSize > 0;
+	}
+};
+
 static void printUsage(const std::string& message = "");
 static bool parseArgs(int argc, char *argv[], std::map<std::string, std::string >& values);
+static bool readFile(const std::string& path, MrzFile& file);
 
 // Configuration for MRZ deep learning engine
 // More info about JSON configuration entries: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
@@ -141,19 +158,12 @@ int main(int argc, char *argv[])
 	jsonConfig += "}"; // end-of-config
 
 	// Decode the file
-	FILE* file = nullptr;
-	if (!file && (file = fopen(pathFileImage.c_str(), "rb")) == nullptr) {
-		ULTMRZ_SDK_PRINT_ERROR("Can't open %s", pathFileImage.c_str());
+	MrzFile file;
+	if (!readFile(pathFileImage, file)) {
+		ULTMRZ_SDK_PRINT_ERROR("Can't process %s", pathFileImage.c_str());
 		return -1;
 	}
-	
-	int width, height, channels;
-	stbi_uc* uncompressedData = stbi_load_from_file(file, &width, &height, &channels, 0);
-	fclose(file);
-	if (!uncompressedData || !width || !height || (channels != 1 && channels != 3 && channels != 4)) {
-		ULTMRZ_SDK_PRINT_ERROR("Invalid file(%s, %d, %d, %d)", pathFileImage.c_str(), width, height, channels);
-		return -1;
-	}
+	ULTMRZ_SDK_ASSERT(file.isValid());
 
 	// Init
 	ULTMRZ_SDK_PRINT_INFO("Initialization...");
@@ -166,10 +176,12 @@ int main(int argc, char *argv[])
 	// and initialized which means it will be slow. In your application you've to initialize the engine
 	// once and do all the recognitions you need then, deinitialize it.
 	ULTMRZ_SDK_ASSERT((result = UltMrzSdkEngine::process(
-		channels == 4 ? ULTMRZ_SDK_IMAGE_TYPE_RGBA32 : (channels == 1 ? ULTMRZ_SDK_IMAGE_TYPE_Y : ULTMRZ_SDK_IMAGE_TYPE_RGB24),
-		uncompressedData,
-		static_cast<size_t>(width),
-		static_cast<size_t>(height)
+		file.channels == 4 ? ULTMRZ_SDK_IMAGE_TYPE_RGBA32 : (file.channels == 1 ? ULTMRZ_SDK_IMAGE_TYPE_Y : ULTMRZ_SDK_IMAGE_TYPE_RGB24),
+		file.uncompressedDataPtr,
+		static_cast<size_t>(file.width),
+		static_cast<size_t>(file.height),
+		0, // stride
+		UltMrzSdkEngine::exifOrientation(file.compressedDataPtr, file.compressedDataSize)
 	)).isOK());
 
 	// Print result
@@ -183,9 +195,6 @@ int main(int argc, char *argv[])
 	if (!json_.empty()) {
 		ULTMRZ_SDK_PRINT_INFO("result: %s", json_.c_str());
 	}
-
-	// free memory
-	stbi_image_free(uncompressedData);
 
 	// Press any key to terminate
 	ULTMRZ_SDK_PRINT_INFO("Press any key to terminate !!");
@@ -253,4 +262,40 @@ static bool parseArgs(int argc, char *argv[], std::map<std::string, std::string 
 	}
 
 	return true;
+}
+
+static bool readFile(const std::string& path, MrzFile& file)
+{
+	// Open the file
+	if ((file.filePtr = fopen(path.c_str(), "rb")) == nullptr) {
+		ULTMRZ_SDK_PRINT_ERROR("Can't open %s", path.c_str());
+		return false;
+	}
+
+	// Retrieve file size
+	struct stat st_;
+	if (stat(path.c_str(), &st_) != 0) {
+		ULTMRZ_SDK_PRINT_ERROR("File is empty %s", path.c_str());
+	}
+	file.compressedDataSize = static_cast<size_t>(st_.st_size);
+
+	// Alloc memory and read data
+	file.compressedDataPtr = ::malloc(file.compressedDataSize);
+	if (!file.compressedDataPtr) {
+		ULTMRZ_SDK_PRINT_ERROR("Failed to alloc mem with size = %zu", file.compressedDataSize);
+		return false;
+	}
+	size_t read_;
+	if (file.compressedDataSize != (read_ = fread(file.compressedDataPtr, 1, file.compressedDataSize, file.filePtr))) {
+		ULTMRZ_SDK_PRINT_ERROR("fread(%s) returned %zu instead of %zu", path.c_str(), read_, file.compressedDataSize);
+		return false;
+	}
+
+	// Decode image
+	file.uncompressedDataPtr = stbi_load_from_memory(
+		reinterpret_cast<stbi_uc const *>(file.compressedDataPtr), static_cast<int>(file.compressedDataSize), 
+		&file.width, &file.height, &file.channels, 0
+	);
+	
+	return file.isValid();
 }

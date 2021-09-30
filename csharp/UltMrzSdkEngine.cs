@@ -86,6 +86,11 @@ public class UltMrzSdkEngine : IDisposable {
     return ret;
   }
 
+  public static int exifOrientation(IntPtr jpegMetaDataPtr, uint jpegMetaDataSize) {
+    int ret = ultimateMrzSdkPINVOKE.UltMrzSdkEngine_exifOrientation(jpegMetaDataPtr, jpegMetaDataSize);
+    return ret;
+  }
+
   public static UltMrzSdkResult requestRuntimeLicenseKey(bool rawInsteadOfJSON) {
     UltMrzSdkResult ret = new UltMrzSdkResult(ultimateMrzSdkPINVOKE.UltMrzSdkEngine_requestRuntimeLicenseKey__SWIG_0(rawInsteadOfJSON), true);
     return ret;
