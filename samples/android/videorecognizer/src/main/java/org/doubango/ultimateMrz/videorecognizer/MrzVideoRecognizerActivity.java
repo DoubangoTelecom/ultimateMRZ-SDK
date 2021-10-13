@@ -52,6 +52,26 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
     static final String ACTIVATION_MASTER_OR_SLAVE_KEY = "";
 
     /**
+     * Base64 string representing the license token.
+     * JSON name: "license_token_data"
+     * Default: null
+     * type: string
+     * pattern: base64
+     * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#license-token-data
+     */
+    static final String LICENSE_TOKEN_DATA = "";
+
+    /**
+     * Path to the file containing the license token.
+     * JSON name: "license_token_file"
+     * Default: null
+     * type: string
+     * pattern: path
+     * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#license-token-file
+     */
+    static final String LICENSE_TOKEN_FILE = "";
+
+    /**
      * Defines the debug level to output on the console. You should use "verbose" for diagnostic, "info" in development stage and "warn" on production.
      * JSON name: "debug_level"
      * Default: "info"
@@ -280,6 +300,12 @@ public class MrzVideoRecognizerActivity extends MrzActivity {
 
     @Override
     protected String getActivationServerUrl() { return ACTIVATION_SERVER_URL; }
+
+    @Override
+    protected String getLicenseTokenData() { return LICENSE_TOKEN_DATA; }
+
+    @Override
+    protected String getLicenseTokenFile() { return LICENSE_TOKEN_FILE; }
 
     @Override
     protected String getActivationMasterOrSlaveKey() { return ACTIVATION_MASTER_OR_SLAVE_KEY; }

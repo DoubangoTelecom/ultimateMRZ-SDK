@@ -65,11 +65,15 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
 
         // Init the engine
         final JSONObject config = getJsonConfig();
+        String tokenData = getLicenseTokenData();
         // Retrieve previously stored key from internal storage
-        String tokenFile = MrzLicenseActivator.tokenFile(this);
-        if (!tokenFile.isEmpty()) {
+        String tokenFile = getLicenseTokenFile().isEmpty() ? (tokenData.isEmpty() ? MrzLicenseActivator.tokenFile(this) : "") : getLicenseTokenFile();
+        if (!tokenFile.isEmpty() && tokenData.isEmpty()) {
+            tokenData = MrzLicenseActivator.tokenData(tokenFile);
+        }
+        if (!tokenData.isEmpty()) {
             try {
-                config.put("license_token_data", MrzLicenseActivator.tokenData(tokenFile));
+                config.put("license_token_data", tokenData);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -83,7 +87,7 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
 
         // Activate the license
         final boolean isActivationPossible = !getActivationServerUrl().isEmpty() && !getActivationMasterOrSlaveKey().isEmpty();
-        if (isActivationPossible && tokenFile.isEmpty()) {
+        if (isActivationPossible && tokenFile.isEmpty() && tokenData.isEmpty()) {
             // Generate the license key and store it to the internal storage for next times
             tokenFile = MrzLicenseActivator.activate(this, getActivationServerUrl(), getActivationMasterOrSlaveKey(), false);
             if (!tokenFile.isEmpty()) {
@@ -227,13 +231,23 @@ public abstract class MrzActivity extends AppCompatActivity implements MrzCamera
     }
 
     /**
+     * Gets the license token data.
+     * @return base64 string
+     */
+    protected String getLicenseTokenData() { return ""; }
+
+    /**
+     * Gets the license token file.
+     * @return path
+     */
+    protected String getLicenseTokenFile() { return ""; }
+
+    /**
      * Gets the server url used to activate the license. Please contact us to get the correct URL.
      * e.g. https://localhost:3600
      * @return The URL
      */
-    protected String getActivationServerUrl() {
-        return "";
-    }
+    protected String getActivationServerUrl() { return ""; }
 
     /**
      * Gets the master or slave key to use for the activation.

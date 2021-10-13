@@ -14,7 +14,7 @@ ultimateMRZ-SDK public header
 #include <string>
 
 #define ULTMRZ_SDK_VERSION_MAJOR		2
-#define ULTMRZ_SDK_VERSION_MINOR		9
+#define ULTMRZ_SDK_VERSION_MINOR		10
 #define ULTMRZ_SDK_VERSION_MICRO		0
 
 // Windows's symbols export

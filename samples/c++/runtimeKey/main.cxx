@@ -11,6 +11,9 @@
 			[--json <json-output:bool>] \
 			[--assets <path-to-assets-folder>]
 			[--type <host-type>]
+			[--appid <application-identifier>]
+			[--appsign <application-signature>]
+			[--appstore <list-of-stores-sep-comma>]
 
 	Example:
 		runtimeKey \
@@ -21,6 +24,8 @@
 
 #include <ultimateMRZ-SDK-API-PUBLIC.h>
 #include "../mrz_utils.h"
+
+#include <algorithm>
 
 using namespace ultimateMrzSdk;
 
@@ -41,15 +46,45 @@ int main(int argc, char *argv[])
 	if (args.find("--json") != args.end()) {
 		rawInsteadOfJSON = (args["--json"].compare("true") != 0);
 	}
+
+	std::string type;
+	if (args.find("--type") != args.end()) {
+		type = args["--type"];
+	}
+
+	// App information
+	std::string appid, appsign, appstore;
+	if (type == "android-app") {
+		static const char* requiredArgs[] = { "--appid", "--appsign", "--appstore" };
+		for (size_t i = 0; i < sizeof(requiredArgs) / sizeof(requiredArgs[0]); ++i) {
+			if (args.find(requiredArgs[i]) == args.end()) {
+				printUsage(std::string(requiredArgs[i]) + "is required");
+				return -1;
+			}
+		}
+		appid = args["--appid"];
+		appsign = args["--appsign"];
+		appstore = args["--appstore"];
+
+		appsign.erase(std::remove(appsign.begin(), appsign.end(), ':'), appsign.end()); // Remove ':' from the signature
+
+		ULTMRZ_SDK_ASSERT(!appid.empty() && !appsign.empty() && !appstore.empty());
+	}
+	
 	
 	// Build JSON string
 	std::string jsonConfig;
 	if (args.find("--assets") != args.end()) {
 		jsonConfig += std::string("\"assets_folder\": \"") + args["--assets"] + std::string("\""); 
 	}
-	if (args.find("--type") != args.end()) {
+	if (!type.empty()) {
 		jsonConfig += (jsonConfig.empty() ? "" : ",") 
-			+ std::string("\"host_type\": \"") + args["--type"] + std::string("\"");
+			+ std::string("\"host_type\": \"") + type + std::string("\"");
+		if (!appid.empty()) {
+			jsonConfig += std::string(",\"license_app_id\": \"") + appid + std::string("\"")
+				+ std::string(",\"license_app_sign\": \"") + appsign + std::string("\"")
+				+ std::string(",\"license_app_store\": \"") + appstore + std::string("\"");
+		}
 	}
 	jsonConfig = "{" + jsonConfig + "}";
 
@@ -93,7 +128,10 @@ static void printUsage(const std::string& message /*= ""*/)
 		"\n"
 		"--json: Whether to output the runtime license key as JSON string intead of raw string. Default: true.\n"
 		"--assets: Path to the assets folder containing the configuration files and models. Default value is the current folder.\n"
-		"--type: Defines how the license is attached to the machine/host. Possible values are 'aws-instance' or 'aws-byol'. Default: null.\n"
+		"--type: Defines how the license is attached to the machine/host. Possible values are 'aws-instance', 'aws-byol', 'azure-instance', 'azure-byol' or 'android-app'. Default: null.\n"
+		"--appid: Defines the application's identifier if the license is to be attached to an app. Required if 'type' is equal to 'android-app'. Default: null.\n"
+		"--appsign: Defines the hash code for the certificate used to sign the app. Required if 'appid' is not null. Default: null.\n"
+		"--appstore: Defines the comma-separated list of stores the app is allowed to run on. Required if 'appid' is not null. Default: null.\n"
 		"********************************************************************************\n"
 	);
 }
