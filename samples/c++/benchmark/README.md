@@ -42,12 +42,13 @@ Some performance numbers on high-end (**Core i7**) and low-end (**Raspberry Pi 4
 
 |  | 0.0 rate | 0.2 rate | 0.5 rate | 0.7 rate | 1.0 rate |
 |-------- | --- | --- | --- | --- | --- |
-| **Core i7-4790K (Windows 8)** | 877 millis<br/>**114 fps** | 1975 millis<br/>50.61 fps | 3736 millis<br/>26.76 fps | 4901 millis<br/>20.40 fps | 6526 millis<br/>15.32 fps |
+| **Core i7-4790K (Windows 8)<br/>(AMD RADEON R9 M290X GPU)** | 877 millis<br/>**114 fps** | 1975 millis<br/>50.61 fps | 3736 millis<br/>26.76 fps | 4901 millis<br/>20.40 fps | 6526 millis<br/>15.32 fps |
 | **iPhone7 (iOS 13)** | 1990 millis<br/>**50.23 fps** | 4325 millis<br/>23.11 fps | 7982 millis<br/>12.52 fps | 10595 millis<br/>9.43 fps | 14201 millis<br/>7.04 fps |
 | **Galaxy S10+ (Android 10)** | 2825 millis<br/>**35.39 fps** | 7575 millis<br/>13.20 fps | 12960 millis<br/>7.71 fps | 17636 millis<br/>5.67 fps | 21069 millis<br/>4.74 fps |
 | **Raspberry Pi 4 (Raspbian Buster)** | 4335 millis<br/>**23.06 fps** | 13555 millis<br/>7.37 fps | 27878 millis<br/>3.58 fps | 37399 millis<br/>2.67 fps | 47797 millis<br/>2.09 fps |
 
 Some notes:
+- The **GPGPU accelration** is done using OpenCL and works on GPUs (Intel, NVIDIA, AMD...)
 - **Please note that even if Raspberry Pi 4 has a 64-bit CPU [Raspbian OS](https://en.wikipedia.org/wiki/Raspbian>) uses a 32-bit kernel which means we're loosing many SIMD optimizations.**
 
 <a name="prebuilt"></a>
