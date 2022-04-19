@@ -31,10 +31,8 @@ import argparse
 import json
 import platform
 import os.path
-from PIL import Image, ExifTags
 
-# EXIF orientation TAG
-ORIENTATION_TAG = [orient for orient in ExifTags.TAGS.keys() if ExifTags.TAGS[orient] == 'Orientation']
+TAG = "[PythonRecognizer] "
 
 # Defines the default JSON configuration. More information at https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html
 JSON_CONFIG = {
@@ -54,7 +52,39 @@ JSON_CONFIG = {
     "min_score": 0.0
 }
 
-TAG = "[PythonRecognizer] "
+IMAGE_TYPES_MAPPING = { 
+        'RGB': ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_RGB24,
+        'RGBA': ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_RGBA32,
+        'L': ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_Y
+}
+
+# Load image
+def load_pil_image(path):
+    from PIL import Image, ExifTags, ImageOps
+    import traceback
+    pil_image = Image.open(path)
+    img_exif = pil_image.getexif()
+    ret = {}
+    orientation  = 1
+    try:
+        if img_exif:
+            for tag, value in img_exif.items():
+                decoded = ExifTags.TAGS.get(tag, tag)
+                ret[decoded] = value
+            orientation  = ret["Orientation"]
+    except Exception as e:
+        print(TAG + "An exception occurred: {}".format(e))
+        traceback.print_exc()
+
+    if orientation > 1:
+        pil_image = ImageOps.exif_transpose(pil_image)
+
+    if pil_image.mode in IMAGE_TYPES_MAPPING:
+        imageType = IMAGE_TYPES_MAPPING[pil_image.mode]
+    else:
+        raise ValueError(TAG + "Invalid mode: %s" % pil_image.mode)
+
+    return pil_image, imageType
 
 # Check result
 def checkResult(operation, result):
@@ -87,25 +117,11 @@ if __name__ == "__main__":
 
     # Check if image exist
     if not os.path.isfile(IMAGE):
-        print(TAG + "File doesn't exist: %s" % IMAGE)
-        assert False
+        raise OSError(TAG + "File doesn't exist: %s" % IMAGE)
 
-    # Decode the image
-    image = Image.open(IMAGE)
+    # Decode the image and extract type
+    image, imageType = load_pil_image(IMAGE)
     width, height = image.size
-    if image.mode == "RGB":
-        format = ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_RGB24
-    elif image.mode == "RGBA":
-        format = ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_RGBA32
-    elif image.mode == "L":
-        format = ultimateMrzSdk.ULTMRZ_SDK_IMAGE_TYPE_Y
-    else:
-        print(TAG + "Invalid mode: %s" % image.mode)
-        assert False
-
-    # Read the EXIF orientation value
-    exif = image._getexif()
-    exifOrientation = exif[ORIENTATION_TAG[0]] if len(ORIENTATION_TAG) == 1 and exif != None else 1
 
     # Update JSON options using values from the command args
     if ASSETS:
@@ -131,13 +147,13 @@ if __name__ == "__main__":
     # once and do all the recognitions you need then, deinitialize it.
     checkResult("Process",
                 ultimateMrzSdk.UltMrzSdkEngine_process(
-                    format,
+                    imageType,
                     image.tobytes(), # type(x) == bytes
                     width,
                     height,
                     0, # stride
-                    exifOrientation
-                    )
+                    1 # exifOrientation (already rotated in load_image -> use default value: 1)
+                )
         )
 
     # Press any key to exit
