@@ -99,7 +99,7 @@ public class Recognizer {
    * pattern: true | false
    * More info: https://www.doubango.org/SDKs/mrz/docs/Configuration_options.html#gpgpu-workload-balancing-enabled
    */
-  static final boolean CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED = false;
+  static final boolean CONFIG_GPGPU_WORKLOAD_BALANCING_ENABLED = !System.getProperty("os.arch").equals("amd64");;
 
   /**
    * Whether to enable backpropagation to detect the MRZ lines.
@@ -277,7 +277,7 @@ public class Recognizer {
        // Now that you're done, deInit the engine before exiting
        CheckResult("DeInit", UltMrzSdkEngine.deInit());
    }
-   
+
    static int getExifOrientation(File file) throws IOException 
    {
       FileInputStream fin= new FileInputStream(file);
@@ -298,7 +298,12 @@ public class Recognizer {
       channel.close();
       fin.close();
 
-      return UltMrzSdkEngine.exifOrientation(buffer, buffer.remaining());
+	  final int orientation = UltMrzSdkEngine.exifOrientation(buffer, buffer.remaining());
+      if (orientation < 1 || orientation > 8) {
+         System.err.println(String.format("Invalid EXIF orientation value: %d", orientation));
+         return 1;
+      }
+      return orientation;
     }
 
    static Hashtable<String, String> ParseArgs(String[] args) throws IllegalArgumentException
