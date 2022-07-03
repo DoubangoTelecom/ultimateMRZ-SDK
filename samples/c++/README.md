@@ -3,6 +3,7 @@
     - [Installing the toolchain](#cross-compilation-rpi-install)
       - [Windows](#cross-compilation-rpi-install-windows)
       - [Ubuntu](#cross-compilation-rpi-install-ubuntu)
+- [Known issues](#known-issues)
       
 
 There are 5 C++ samples: [Benchmark](benchmark), [Parser](parser), [Recognizer](recognizer), [RuntimeKey](runtimeKey) and [Validation](validation). Check [here](benchmark/README.md), [here](parser/README.md), [here](recognizer/README.md), [here](runtimeKey/README.md) and Check [here](validation/README.md) on how to build and use them.
@@ -41,3 +42,8 @@ set PATH=%PATH%;C:\SysGCC\raspberry\bin
 sudo apt-get update
 sudo apt-get install crossbuild-essential-armhf
 ```
+
+<a name="known-issues"></a>
+# Known issues #
+- On Linux you may get `[CompVSharedLib] Failed to load library with path=<...>libultimatePluginOpenVINO.so, Error: 0xffffffff`. Make sure to set `LD_LIBRARY_PATH` to add binaries folder to help the loader find all dependencies. You can also run `ldd libultimatePluginOpenVINO.so` to see which libraries are missing.
+- On Linux you may get `'GLIBC_2.27' not found (required by <...>)`. This message means you're using an old glibc version. Update glibc or your OS to Ubuntu 18, Debian Buster... You can check your actual version by running `ldd --version`. 
